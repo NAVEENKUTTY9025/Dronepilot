@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found – AeroDrone professional drone services">
+    <title>AeroDrone | 404 – Page Not Found</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --error-glow: rgba(74, 158, 255, 0.2);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --error-glow: rgba(110, 176, 255, 0.25);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1, h2, h3 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        a { text-decoration: none; color: inherit; }
+        
+        /* ----- NAVBAR (Simplified with RTL & Dark Mode) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        
+        .logo:hover { opacity: 0.8; }
+        
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--bg-primary);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        
+        .logo-icon i { color: var(--accent-lightblue); font-size: 1.5rem; }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            transform: scale(1.05);
+        }
+        
+        .home-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        
+        .home-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        
+        /* ----- 404 MAIN CONTENT (NO SCROLL, CENTERED) ----- */
+        .error-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+            height: calc(100vh - 73px);
+            margin-top: 73px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-main::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle, var(--accent-lightblue) 0%, transparent 70%);
+            opacity: 0.05;
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .error-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .drone-animation {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .drone-icon {
+            font-size: 6rem;
+            color: var(--accent-lightblue);
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px var(--error-glow));
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--accent-lightblue) 0%, var(--text-main) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        @media (min-width: 768px) {
+            .error-code { font-size: 10rem; }
+        }
+        
+        .error-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+        
+        @media (min-width: 768px) {
+            .error-title { font-size: 2rem; }
+        }
+        
+        .error-message {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .search-box {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-lightblue);
+            border-radius: 9999px;
+            padding: 0.25rem;
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+        
+        .search-btn {
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+            border: none;
+            padding: 0.65rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+        }
+        
+        .search-btn:hover {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            transform: scale(0.98);
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.75rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 2px solid var(--accent-lightblue);
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--accent-lightblue);
+            color: var(--text-main);
+            padding: 0.75rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            background: transparent;
+            font-size: 0.9rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-subtle);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .quick-link {
+            color: var(--accent-lightblue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: 0.2s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+        }
+        
+        .quick-link:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        
+        .quick-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        
+        /* No scrollbar, fixed layout */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SIMPLIFIED NAVBAR with RTL & Dark Mode only -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">Light Blue Horizon</span>
+            </div>
+        </a>
+        <div class="nav-controls">
+            <button class="icon-btn" id="theme-toggle" title="Dark/Light Mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <button class="icon-btn" id="rtl-toggle" title="RTL Layout">
+                <i class="fas fa-right-left"></i>
+            </button>
+           
+        </div>
+    </div>
+</nav>
+
+<!-- 404 MAIN CONTENT (Fixed, No Scroll) -->
+<main class="error-main">
+    <div class="container">
+        <div class="error-content">
+            <div class="drone-animation">
+                <i class="fas fa-drone drone-icon"></i>
+            </div>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Flight Path Not Found</h1>
+            <p class="error-message">
+                Looks like this drone took a wrong turn! The page you're looking for doesn't exist or has been moved to another airspace.
+            </p>
+            
+            <!-- Search Box -->
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search our site..." id="error-search">
+                <button class="search-btn" id="search-button"><i class="fas fa-search"></i> Search</button>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                 <a href="contact.html" class="btn-outline"><i class="fas fa-headset"></i> Contact Support</a>
+               
+                <a href="fleet.html" class="btn-outline"><i class="fas fa-drone"></i> Explore Fleet</a>
+               
+            </div>
+            
+            <!-- Quick Links -->
+            
+        </div>
+    </div>
+</main>
+
+<script>
+    (function() {
+        // ==================== THEME TOGGLE (Dark/Light) ====================
+        const htmlEl = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Load saved theme
+        let savedTheme = localStorage.getItem('theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        }
+        
+        updateThemeIcon(savedTheme);
+        
+        function toggleTheme() {
+            let currentTheme = htmlEl.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // ==================== RTL TOGGLE ====================
+        const rtlToggle = document.getElementById('rtl-toggle');
+        
+        // Load saved direction
+        let savedDirection = localStorage.getItem('direction') || 'ltr';
+        htmlEl.setAttribute('dir', savedDirection);
+        
+        function toggleRtl() {
+            let currentDir = htmlEl.getAttribute('dir');
+            let newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+            htmlEl.setAttribute('dir', newDir);
+            localStorage.setItem('direction', newDir);
+        }
+        
+        if (rtlToggle) {
+            rtlToggle.addEventListener('click', toggleRtl);
+        }
+        
+        // ==================== SEARCH FUNCTIONALITY ====================
+        const searchInput = document.getElementById('error-search');
+        const searchButton = document.getElementById('search-button');
+        
+        function handleSearch() {
+            const query = searchInput.value.trim();
+            if (query) {
+                alert(`🔍 Searching for "${query}"...\n\nCheck our fleet, services, or contact us for drone solutions.`);
+            } else {
+                alert('Please enter a search term to explore our drone services.');
+            }
+        }
+        
+        if (searchButton) {
+            searchButton.addEventListener('click', handleSearch);
+        }
+        
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearch();
+                }
+            });
+        }
+        
+        // ==================== PREVENT ANY SCROLLING ====================
+        // Ensure body has no scroll
+        document.body.style.overflow = 'hidden';
+        
+        // Disable wheel scroll on main container
+        const errorMain = document.querySelector('.error-main');
+        if (errorMain) {
+            errorMain.addEventListener('wheel', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+        }
+        
+        // Also prevent touch move for mobile
+        document.body.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // But allow clicks on buttons and links normally
+        const clickableElements = document.querySelectorAll('a, button, .search-input');
+        clickableElements.forEach(el => {
+            el.addEventListener('touchmove', (e) => {
+                e.stopPropagation();
+            });
+        });
+        
+        // Fix for any potential anchor link scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+        });
+    })();
+</script>
+</body>
+</html>
