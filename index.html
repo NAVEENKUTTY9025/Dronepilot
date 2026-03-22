@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional drone pilot services – aerial photography, surveying, inspection & pilot training">
+    <title>AeroDrone | Black & Light Blue</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & VARIABLES (Black, White, Light Blue) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            /* Light mode */
+            --bg-primary: #FFFFFF;        /* white background */
+            --bg-secondary: #f0f7ff;       /* very light blue tint */
+            --text-main: #000000;           /* black text */
+            --text-muted: #1e2a3a;          /* dark blue-gray for muted text */
+            --card-bg: #FFFFFF;              /* white cards */
+            --border-subtle: #b8d1f0;        /* soft light blue border */
+            --accent-lightblue: #4a9eff;     /* vibrant light blue (main accent) */
+            --navbar-bg: #FFFFFF;           
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;           /* very light blue for backgrounds */
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;           /* dark navy background */
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;             /* white text */
+            --text-muted: #b0c7e9;            /* light blue-gray muted */
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;      /* brighter light blue for dark mode */
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --btn-hover-bg: #FFFFFF;
+            --btn-hover-text: #0a0f1a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ----- NAVBAR (identical logo structure as footer) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        /* LOGO — exact same class used in footer for consistency */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        /* desktop nav */
+        .desktop-nav { display: none; align-items: center; gap: 0.25rem; }
+        .nav-link {
+            color: var(--text-muted);
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-link:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .nav-link.active {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            font-weight: 700;
+        }
+        /* dropdown */
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(74,158,255,0.3);
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 12px;
+        }
+        .dropdown-arrow { font-size: 0.7rem; transition: 0.2s; }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        /* desktop right */
+        .navbar-right-desktop { display: none; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .mobile-menu-btn {
+            display: flex;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        /* mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+        }
+        .mobile-menu-close { color: var(--text-main); font-size: 2rem; background: none; border: none; cursor: pointer; }
+        .mobile-menu-items { padding: 1.5rem; }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-menu-item i { color: var(--accent-lightblue); margin-right: 1rem; width: 1.75rem; }
+        .mobile-dropdown { border-bottom: 1px solid var(--border-subtle); }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+        }
+        .mobile-dropdown-content.active { max-height: 200px; padding: 0.75rem 0; }
+        .mobile-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: var(--text-muted);
+        }
+        .mobile-dropdown-content a:hover { background-color: var(--accent-lightblue); color: var(--pure-white); }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-action-item i { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-separator { margin: 1rem 0; border-top: 2px solid var(--accent-lightblue); }
+
+        /* ----- HERO ----- */
+        .hero {
+            background-color: var(--bg-primary);
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 80px;
+        }
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 30%, rgba(74,158,255,0.1) 0px, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+        @media (min-width: 640px) { .hero-title { font-size: 3rem; } }
+        @media (min-width: 768px) { .hero-title { font-size: 3.75rem; } }
+        @media (min-width: 1024px) { .hero-title { font-size: 4.5rem; } }
+        .hero-title span { color: var(--accent-lightblue); }
+        .hero-text { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .btn-primary {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 1rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .btn-outline {
+            border: 2px solid var(--accent-lightblue);
+            color: var(--text-main);
+            padding: 1rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .stats { display: flex; gap: 2rem; margin-top: 2.5rem; }
+        .stat-number { font-size: 2rem; font-weight: 900; color: var(--accent-lightblue); line-height: 1; }
+        .stat-label { font-size: 0.875rem; display: block; color: var(--text-muted); }
+        .hero-image {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 4px solid var(--accent-lightblue);
+            min-height: 400px;
+            width: 100%;
+            background-color: var(--bg-secondary);
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ----- CARDS & SECTIONS ----- */
+        .service-card, .model-card, .drone-card, .preview-card, .team-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: 0.2s;
+        }
+        .service-card:hover, .model-card:hover { border-color: var(--accent-lightblue); transform: translateY(-4px); }
+        .service-icon {
+            width: 5rem; height: 5rem; margin: 0 auto 1.5rem;
+            background: rgba(74,158,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: var(--accent-lightblue);
+        }
+        .models-grid, .services-grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+        @media (min-width:768px) { .services-grid, .models-grid { grid-template-columns: repeat(3,1fr); } }
+        .model-card img {
+            width: 100%; height: 200px; object-fit: cover; border-radius: 1rem; margin-bottom: 1rem;
+            filter: grayscale(20%);
+        }
+        .model-price { font-size: 2rem; font-weight: 700; color: var(--accent-lightblue); margin: 1rem 0; }
+        .spec-list { list-style: none; margin: 1rem 0; }
+        .spec-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border-subtle); color: var(--text-muted); }
+        .spec-list i { color: var(--accent-lightblue); margin-right: 0.5rem; }
+
+        .steps-grid {
+            display: grid; gap: 2rem;
+            grid-template-columns: repeat(1,1fr);
+        }
+        @media (min-width:768px) { .steps-grid { grid-template-columns: repeat(4,1fr); } }
+        .step-item { text-align: center; }
+        .step-circle {
+            width: 5rem; height: 5rem; background-color: var(--bg-secondary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+            border: 2px solid var(--accent-lightblue); font-size: 2rem; color: var(--accent-lightblue);
+        }
+
+        .preview-card {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            padding: 2rem;
+        }
+        .badge {
+            background-color: var(--accent-lightblue); color: var(--pure-white);
+            padding: 0.375rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 700;
+            display: inline-block;
+        }
+        .feature-item {
+            display: flex; gap: 1rem; padding: 1rem; background-color: rgba(74,158,255,0.05);
+            border-radius: 1rem; align-items: center; margin-bottom: 1rem;
+        }
+        .feature-icon {
+            width: 3rem; height: 3rem; background-color: rgba(74,158,255,0.1);
+            border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+            color: var(--accent-lightblue); font-size: 1.25rem;
+        }
+        .price { font-size: 2rem; font-weight: 700; color: var(--accent-lightblue); }
+        .price-old { text-decoration: line-through; opacity: 0.6; color: var(--text-muted); }
+
+        .team-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; }
+        @media (min-width:640px){ .team-grid { grid-template-columns: repeat(4,1fr); } }
+        .team-card { padding: 1rem; text-align: center; }
+        .team-img {
+            width: 100%; aspect-ratio: 1/1; border-radius: 50%; 
+            background-size: cover; background-position: center; border: 2px solid var(--accent-lightblue);
+        }
+
+        .newsletter {
+            background-color: var(--bg-secondary); padding: 5rem 0; border-top: 1px solid var(--accent-lightblue);
+            border-bottom: 1px solid var(--accent-lightblue); position: relative;
+        }
+        .newsletter-title { font-size: 3rem; color: var(--text-main); }
+        .newsletter-text { color: var(--text-muted); }
+        .newsletter-input {
+            flex: 1; padding: 1rem 1.5rem; border-radius: 9999px; border: 2px solid var(--accent-lightblue);
+            background-color: var(--bg-primary); color: var(--text-main); outline: none;
+        }
+        .newsletter-input::placeholder { color: var(--text-muted); }
+        .newsletter-btn {
+            background-color: var(--accent-lightblue); color: var(--pure-white); padding: 1rem 2rem; border-radius: 9999px;
+            font-weight: 700; border: 1px solid var(--accent-lightblue); cursor: pointer;
+        }
+        .newsletter-btn:hover { background-color: transparent; color: var(--text-main); border-color: var(--text-main); }
+
+        /* ----- FOOTER (logo identical to navbar) ----- */
+        .footer {
+            background-color: var(--bg-primary); 
+            color: var(--text-main); 
+            padding: 4rem 0 2rem 0; 
+            border-top: 2px solid var(--accent-lightblue);
+        }
+        .footer-grid { 
+            display: grid; 
+            gap: 2.5rem; 
+            grid-template-columns: 1fr; 
+            margin-bottom: 3rem;
+        }
+        @media (min-width:768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+        .footer-logo-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        /* reuse .logo class inside footer – exactly the same style */
+        .footer .logo {
+            margin-bottom: 0.5rem;
+        }
+        .footer-heading { 
+            color: var(--accent-lightblue); 
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-links { 
+            list-style: none; 
+        }
+        .footer-links li { 
+            margin-bottom: 0.75rem; 
+        }
+        .footer-links a { 
+            color: var(--text-muted); 
+            transition: 0.2s; 
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover { 
+            color: var(--accent-lightblue); 
+            padding-left: 4px;
+        }
+        .footer-input {
+            width: 100%; 
+            padding: 0.75rem 1rem; 
+            border-radius: 9999px; 
+            border: 1px solid var(--accent-lightblue);
+            background: var(--bg-primary); 
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+        .footer-btn {
+            width: 100%; 
+            background-color: var(--accent-lightblue); 
+            color: var(--pure-white); 
+            padding: 0.75rem 1rem;
+            border-radius: 9999px; 
+            font-weight: 700; 
+            border: 1px solid var(--accent-lightblue); 
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-btn:hover { 
+            background: transparent; 
+            color: var(--text-main); 
+            border-color: var(--text-main); 
+        }
+        .copyright { 
+            border-top: 1px solid var(--border-subtle); 
+            padding-top: 1.5rem; 
+            text-align: center; 
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        #scroll-top {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; width: 3rem; height: 3rem;
+            background-color: var(--accent-lightblue); color: var(--pure-white); border-radius: 50%; border: 1px solid var(--accent-lightblue);
+            cursor: pointer; display: none; z-index: 100;
+        }
+        #scroll-top:hover { background: transparent; color: var(--text-main); }
+
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+        .fade-in-up { animation: fadeInUp 0.7s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR (Black & Light Blue) – same logo as footer -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">light blue horizon</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown" id="home-dropdown">
+                <span class="nav-link active" onclick="toggleDesktopDropdown('home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="fleet.html" class="nav-link">Fleet</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="dropdown" id="dashboard-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="client.html" class="dropdown-item"><i class="fas fa-user mr-2"></i> Client Login</a>
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-user-shield mr-2"></i> Pilot Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <a href="join.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- mobile menu -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">blue above</span>
+            </div>
+        </a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('home-mobile')">
+                <span><i class="fas fa-home"></i> Home</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="home-mobile" class="mobile-dropdown-content">
+                <a href="index.html">Home 1</a> <a href="home2.html">Home 2</a>
+            </div>
+        </div>
+        <a href="about.html" class="mobile-menu-item"><i class="fas fa-users"></i> About</a>
+        <a href="services.html" class="mobile-menu-item"><i class="fas fa-camera"></i> Services</a>
+        <a href="fleet.html" class="mobile-menu-item"><i class="fas fa-drone"></i> Fleet</a>
+        <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
+        <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')">
+                <span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="dashboard-mobile" class="mobile-dropdown-content">
+                <a href="client.html">Client Login</a> <a href="admin.html">Pilot Login</a>
+            </div>
+        </div>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon" id="mobile-theme-icon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- HERO with HD image -->
+<section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="container relative z-10">
+        <div class="hero-grid">
+            <div class="fade-in-up order-2 lg:order-1">
+                <span style="color: var(--accent-lightblue); font-weight: 700; letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem;"><i class="fas fa-drone"></i> FAA Certified</span>
+                <h1 class="hero-title">Professional <span>Aerial</span> Solutions</h1>
+                <p class="hero-text">Cinematic footage • industrial inspections • mapping • training</p>
+                <div class="btn-group">
+                    <a href="#services" class="btn-primary"><i class="fas fa-play"></i> View Work</a>
+                    <a href="#booking" class="btn-outline"><i class="fas fa-calendar"></i> Book Flight</a>
+                </div>
+                <div class="stats">
+                    <div><span class="stat-number">2,500+</span><span class="stat-label">Flights</span></div>
+                    <div><span class="stat-number">98%</span><span class="stat-label">Satisfaction</span></div>
+                    <div><span class="stat-number">15</span><span class="stat-label">Pilots</span></div>
+                </div>
+            </div>
+           <div class="hero-image order-1 lg:order-2" style="width:100%; height:100%;">
+            <!-- placehold.co fallback if images missing -->
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Drone aerial view"
+                 style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background: var(--bg-secondary); padding: 5rem 0;">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:3.5rem;">
+            <span style="color:var(--accent-lightblue); font-weight:700; text-transform:uppercase;">what we offer</span>
+            <h2 style="font-size:2.5rem; margin:1rem 0;">Professional Drone Services</h2>
+            <p style="color:var(--text-muted);">Real estate, inspection, mapping — all covered</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-camera-retro"></i></div>
+                <h3>Aerial Photography</h3>
+                <p style="color:var(--text-muted); margin:1rem 0;">4K cinematic for real estate & events</p>
+                <a href="#" style="color:var(--accent-lightblue);">Learn more <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+                <h3>Industrial Inspection</h3>
+                <p style="color:var(--text-muted); margin:1rem 0;">Infrastructure, solar, turbines</p>
+                <a href="#" style="color:var(--accent-lightblue);">Learn more <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Surveying & Mapping</h3>
+                <p style="color:var(--text-muted); margin:1rem 0;">3D mapping & photogrammetry</p>
+                <a href="#" style="color:var(--accent-lightblue);">Learn more <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FLEET (HD images) -->
+<section style="background:var(--bg-primary); padding:5rem 0;">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:3.5rem;">
+            <span style="color:var(--accent-lightblue); font-weight:700;">OUR FLEET</span>
+            <h2 style="font-size:2.5rem;">Professional Drones</h2>
+        </div>
+        <div class="models-grid">
+            <div class="model-card">
+                <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?q=80&w=2070&auto=format&fit=crop" alt="Inspire 3">
+                <h3>DJI Inspire 3</h3>
+                <p style="color:var(--text-muted);">8K Cinema</p>
+                <div class="model-price">$499<span style="font-size:1rem; color:var(--text-muted);">/day</span></div>
+                <ul class="spec-list"><li><i class="fas fa-check"></i> Full-frame 8K</li><li><i class="fas fa-check"></i> 45min flight</li></ul>
+                <a href="#" class="btn-primary" style="display:block; text-align:center;">Book</a>
+            </div>
+            <div class="model-card">
+                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2070&auto=format&fit=crop" alt="Mavic 3E">
+                <h3>DJI Mavic 3E</h3>
+                <p style="color:var(--text-muted);">Enterprise</p>
+                <div class="model-price">$349<span style="font-size:1rem; color:var(--text-muted);">/day</span></div>
+                <ul class="spec-list"><li><i class="fas fa-check"></i> Thermal + RTK</li><li><i class="fas fa-check"></i> 56x zoom</li></ul>
+                <a href="#" class="btn-primary" style="display:block; text-align:center;">Book</a>
+            </div>
+            <div class="model-card">
+                <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop" alt="Agras T40">
+                <h3>Agras T40</h3>
+                <p style="color:var(--text-muted);">Agriculture</p>
+                <div class="model-price">$699<span style="font-size:1rem; color:var(--text-muted);">/day</span></div>
+                <ul class="spec-list"><li><i class="fas fa-check"></i> 40L capacity</li><li><i class="fas fa-check"></i> Smart spraying</li></ul>
+                <a href="#" class="btn-primary" style="display:block; text-align:center;">Book</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section style="background:var(--bg-secondary); padding:4rem 0;">
+    <div class="container">
+        <h2 style="font-size:3rem; text-align:center;">Meet the pilots</h2>
+         <div class="team-grid">
+            <div class="team-card"><div class="team-img" style="background-image:url('/images/g1.jpg');"></div><h3>James Chen</h3><p style="color:var(--accent-lightblue);">Lead Pilot</p></div>
+            <div class="team-card"><div class="team-img" style="background-image:url('/images/g2.jpg');"></div><h3>Saran M.</h3><p style="color:var(--accent-lightblue);">Inspector</p></div>
+            <div class="team-card"><div class="team-img" style="background-image:url('/images/g3.jpg');"></div><h3>Marcus W.</h3><p style="color:var(--accent-lightblue);">Cinematic</p></div>
+            <div class="team-card"><div class="team-img" style="background-image:url('/images/g4.jpg');"></div><h3>Elen P.</h3><p style="color:var(--accent-lightblue);">Mapping</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="background: var(--accent-lightblue); padding:4rem 0;">
+    <div class="container text-center">
+        <h2 style="font-size:3rem; color:var(--pure-white);">Ready to take off?</h2>
+        <p style="color:var(--pure-white);">10% off first flight</p>
+        <div style="display:flex; gap:1rem; justify-content:center; margin-top:2rem;">
+            <a href="#" class="btn-primary" style="background:var(--pure-black); color:var(--pure-white); border-color:var(--pure-black);">Book Now</a>
+            <a href="#" class="btn-outline" style="border-color:var(--pure-white); color:var(--pure-white);">Contact</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER (matching logo exactly like navbar) -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Left column with exact same logo + tagline -->
+            <div class="footer-logo-block">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div>
+                        <div class="logo-text">Aero<span>Drone</span></div>
+                        <span class="logo-tagline">light blue horizon</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; max-width: 220px;">Drones are transforming the way we capture the world, offering stunning aerial views and precise control from the sky. </p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Fleet</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Stay Updated</h3>
+                <input class="footer-input" placeholder="Your email address">
+                <button class="footer-btn">Subscribe</button>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <i class="fab fa-instagram" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-youtube" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-linkedin" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 2025 AeroDrone — Black · White · Light Blue. All visions from above.
+        </div>
+    </div>
+</footer>
+
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    (function() {
+        const htmlEl = document.documentElement;
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle');
+        const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+        const desktopIcon = document.getElementById('desktop-theme-icon');
+        const mobileIcon = document.getElementById('mobile-theme-icon');
+        const desktopRtl = document.getElementById('desktop-rtl-toggle');
+        const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+        let savedTheme = localStorage.getItem('theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        updateIcons(savedTheme);
+
+        function updateIcons(theme) {
+            const iconClass = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            if (desktopIcon) desktopIcon.className = iconClass;
+            if (mobileIcon) mobileIcon.className = iconClass;
+        }
+
+        function toggleTheme() {
+            let currentTheme = htmlEl.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcons(newTheme);
+        }
+
+        if (desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+        if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+
+        function toggleRtl() {
+            let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+            htmlEl.setAttribute('dir', dir);
+            localStorage.setItem('direction', dir);
+        }
+        if (desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+        if (mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+        window.toggleDesktopDropdown = function(id) {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+            document.getElementById(id)?.classList.toggle('active');
+        };
+        window.toggleMobileDropdown = function(id) {
+            document.getElementById(id)?.classList.toggle('active');
+        };
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-mobile-menu');
+        if (menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        if (closeBtn) closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        if (mobileMenu) mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
+
+        const scrollBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => { if(scrollBtn) scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none'; });
+        if (scrollBtn) scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        window.addEventListener('resize', () => { if (window.innerWidth >= 1280 && mobileMenu) mobileMenu.classList.remove('active'); });
+    })();
+</script>
+</body>
+</html>

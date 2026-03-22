@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional drone pilot services – aerial photography, surveying, inspection & pilot training">
+    <title>AeroDrone | Gallery - Aerial Portfolio</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & VARIABLES (Same as index.html) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            /* Light mode */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --btn-hover-bg: #FFFFFF;
+            --btn-hover-text: #0a0f1a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ----- NAVBAR (exactly same as index.html) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        .desktop-nav { display: none; align-items: center; gap: 0.25rem; }
+        .nav-link {
+            color: var(--text-muted);
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-link:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .nav-link.active {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            font-weight: 700;
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(74,158,255,0.3);
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 12px;
+        }
+        .dropdown-arrow { font-size: 0.7rem; transition: 0.2s; }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .navbar-right-desktop { display: none; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .mobile-menu-btn {
+            display: flex;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+        }
+        .mobile-menu-close { color: var(--text-main); font-size: 2rem; background: none; border: none; cursor: pointer; }
+        .mobile-menu-items { padding: 1.5rem; }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-menu-item i { color: var(--accent-lightblue); margin-right: 1rem; width: 1.75rem; }
+        .mobile-dropdown { border-bottom: 1px solid var(--border-subtle); }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+        }
+        .mobile-dropdown-content.active { max-height: 200px; padding: 0.75rem 0; }
+        .mobile-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: var(--text-muted);
+        }
+        .mobile-dropdown-content a:hover { background-color: var(--accent-lightblue); color: var(--pure-white); }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-action-item i { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-separator { margin: 1rem 0; border-top: 2px solid var(--accent-lightblue); }
+
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+
+        /* Gallery Page Specific Styles */
+        .gallery-hero {
+            background-color: var(--bg-secondary);
+            padding: 8rem 0 3rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .gallery-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .gallery-title span {
+            color: var(--accent-lightblue);
+        }
+        .gallery-sub {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Filter Buttons */
+        .filter-section {
+            padding: 2rem 0;
+            background: var(--bg-primary);
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--accent-lightblue);
+            color: var(--text-main);
+            padding: 0.625rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0 4rem;
+        }
+        .gallery-card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-lightblue);
+            box-shadow: 0 15px 30px rgba(74, 158, 255, 0.2);
+        }
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .card-badge {
+            display: inline-block;
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .card-info {
+            padding: 1.5rem;
+        }
+        .card-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .card-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .details-link {
+            color: var(--accent-lightblue);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+        .details-link:hover {
+            gap: 0.75rem;
+        }
+        
+        /* Footer (exactly same as index.html) */
+        .footer {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            padding: 4rem 0 2rem 0;
+            border-top: 2px solid var(--accent-lightblue);
+        }
+        .footer-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+        @media (min-width:768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            }
+        }
+        .footer-logo-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .footer .logo {
+            margin-bottom: 0.5rem;
+        }
+        .footer-heading {
+            color: var(--accent-lightblue);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover {
+            color: var(--accent-lightblue);
+            padding-left: 4px;
+        }
+        .footer-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--accent-lightblue);
+            background: var(--bg-primary);
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+        .footer-btn {
+            width: 100%;
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-btn:hover {
+            background: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .copyright {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        #scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 50%;
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            display: none;
+            z-index: 100;
+        }
+        #scroll-top:hover {
+            background: transparent;
+            color: var(--text-main);
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR (exactly same as index.html) -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">light blue horizon</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown" id="home-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="fleet.html" class="nav-link">Fleet</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="gallery.html" class="nav-link active">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="dropdown" id="dashboard-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="client.html" class="dropdown-item"><i class="fas fa-user mr-2"></i> Client Login</a>
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-user-shield mr-2"></i> Pilot Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <a href="join.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">blue above</span>
+            </div>
+        </a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('home-mobile')">
+                <span><i class="fas fa-home"></i> Home</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="home-mobile" class="mobile-dropdown-content">
+                <a href="index.html">Home 1</a> <a href="home2.html">Home 2</a>
+            </div>
+        </div>
+        <a href="about.html" class="mobile-menu-item"><i class="fas fa-users"></i> About</a>
+        <a href="services.html" class="mobile-menu-item"><i class="fas fa-camera"></i> Services</a>
+        <a href="fleet.html" class="mobile-menu-item"><i class="fas fa-drone"></i> Fleet</a>
+        <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
+        <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')">
+                <span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="dashboard-mobile" class="mobile-dropdown-content">
+                <a href="client.html">Client Login</a> <a href="admin.html">Pilot Login</a>
+            </div>
+        </div>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon" id="mobile-theme-icon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- Gallery Hero Section -->
+<section class="gallery-hero">
+    <div class="container">
+        <h1 class="gallery-title">Our <span>Aerial</span> Portfolio</h1>
+        <p class="gallery-sub">Explore stunning visuals captured by our professional drone pilots — from cinematic landscapes to precision inspections.</p>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="filter-section">
+    <div class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="cinematic">Cinematic</button>
+            <button class="filter-btn" data-filter="inspection">Inspection</button>
+            <button class="filter-btn" data-filter="mapping">Mapping</button>
+            <button class="filter-btn" data-filter="realestate">Real Estate</button>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="container">
+    <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<!-- FOOTER (exactly same as index.html) -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-logo-block">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div>
+                        <div class="logo-text">Aero<span>Drone</span></div>
+                        <span class="logo-tagline">light blue horizon</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; max-width: 220px;">Drones are transforming the way we capture the world, offering stunning aerial views and precise control from the sky.</p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Fleet</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Stay Updated</h3>
+                <input class="footer-input" placeholder="Your email address">
+                <button class="footer-btn">Subscribe</button>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <i class="fab fa-instagram" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-youtube" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-linkedin" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 2025 AeroDrone — Black · White · Light Blue. All visions from above.
+        </div>
+    </div>
+</footer>
+
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // Gallery Data
+    const galleryData = [
+        {
+            id: 1,
+            title: "Golden Hour Marina",
+            category: "cinematic",
+            image: "https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&auto=format",
+            shortDesc: "Stunning 4K cinematic drone shot over Miami marina during golden sunset.",
+            fullDesc: "Captured with DJI Inspire 3, full-frame sensor capturing breathtaking dynamic range. The golden hour light creates magical reflections on the water, showcasing the beauty of coastal luxury. Perfect for high-end real estate and travel cinematography.",
+            specs: ["Drone: DJI Inspire 3", "Lens: 24mm f/2.8", "Resolution: 8K RAW", "Location: Miami Marina", "Date: February 2025"]
+        },
+        {
+            id: 2,
+            title: "Solar Farm Thermal Scan",
+            category: "inspection",
+            image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format",
+            shortDesc: "Industrial inspection using thermal imaging to detect faulty solar panels.",
+            fullDesc: "Advanced thermal inspection of a 50-acre solar farm. Using radiometric sensors, we identified 23 malfunctioning panels with precision. This non-invasive inspection saved the client over $50,000 in manual inspection costs and reduced downtime significantly.",
+            specs: ["Drone: Mavic 3T", "Sensor: Radiometric Thermal", "Accuracy: ±2°C", "Panels Inspected: 12,500", "Report: AI Analytics"]
+        },
+        {
+            id: 3,
+            title: "Coastal Cliff 3D Mapping",
+            category: "mapping",
+            image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&auto=format",
+            shortDesc: "3D photogrammetry survey for geological study and erosion monitoring.",
+            fullDesc: "High-precision mapping of a 2-mile coastal cliff section. Using RTK GPS and ground control points, we achieved 0.5cm GSD accuracy. The resulting 3D model helps geologists monitor erosion patterns and plan conservation efforts.",
+            specs: ["Drone: Matrice 350 RTK", "Software: Pix4Dmapper", "Output: Orthomosaic + DSM", "Area: 215 acres", "Accuracy: 0.5cm"]
+        },
+        {
+            id: 4,
+            title: "Luxury Villa Aerial Tour",
+            category: "realestate",
+            image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format",
+            shortDesc: "High-end real estate showcase with twilight HDR blend and cinematic fly-through.",
+            fullDesc: "Complete aerial marketing package for a $12M luxury villa. Includes twilight shots, interior-exterior transitions, and a 4K cinematic tour. The video achieved 250k+ views and helped sell the property within 3 weeks.",
+            specs: ["Drone: Mavic 3 Pro", "Style: HDR + Cinematic", "Delivery: 4K Video + Photos", "Client: Sotheby's Realty", "Turnaround: 48 hours"]
+        },
+        {
+            id: 5,
+            title: "Forest Canopy Analysis",
+            category: "inspection",
+            image: "https://images.unsplash.com/photo-1542272201-b1ca555f8505?w=800&auto=format",
+            shortDesc: "Multispectral analysis for tree health monitoring and conservation.",
+            fullDesc: "NDVI and multispectral mapping of 500 acres of protected forest. Identified areas affected by pest infestation and water stress. The data helped the forestry department prioritize conservation efforts and allocate resources effectively.",
+            specs: ["Drone: Phantom 4 Multispectral", "Bands: Red edge, NIR", "Application: Reforestation", "Accuracy: 98%", "Trees Analyzed: 15,000+"]
+        },
+        {
+            id: 6,
+            title: "City Skyline Hyperlapse",
+            category: "cinematic",
+            image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format",
+            shortDesc: "Dynamic hyperlapse over downtown skyline at blue hour.",
+            fullDesc: "Breathtaking 4K hyperlapse capturing the transition from day to night. Over 2.5 hours of flight time compressed into 45 seconds of pure cinematic magic. Featured in the city's tourism campaign and viewed over 1M times.",
+            specs: ["Drone: Air 3", "Duration: 2.5hr flight", "Post: Advanced stabilization", "Usage: Tourism campaign", "Shots: 1,200+ raw images"]
+        },
+        {
+            id: 7,
+            title: "Construction Site Progress",
+            category: "mapping",
+            image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&auto=format",
+            shortDesc: "Weekly progress mapping with volume measurements and BIM integration.",
+            fullDesc: "Comprehensive construction monitoring for a 40-story commercial tower. Weekly orthomosaic maps and 3D models track progress against schedule. Volume calculations for earthworks achieved 99% accuracy, reducing material waste by 15%.",
+            specs: ["Drone: Mavic 3E RTK", "Deliverable: 3D mesh + Reports", "Accuracy: 1cm", "Client: Turner Construction", "Duration: 6 months project"]
+        },
+        {
+            id: 8,
+            title: "Beachfront Resort Promo",
+            category: "realestate",
+            image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&auto=format",
+            shortDesc: "Cinematic resort video and stills for luxury travel magazine.",
+            fullDesc: "Award-winning aerial campaign for a 5-star beach resort. Captured during golden hour and blue hour to showcase the resort's best features. The video won 'Best Hospitality Aerial Content' at the 2024 Drone Awards.",
+            specs: ["Drone: Inspire 2", "Pilot: Sarah Martinez", "Format: 6K Anamorphic", "Usage: Global ad campaign", "Awards: Drone Awards 2024"]
+        },
+        {
+            id: 9,
+            title: "Wind Turbine Blade Inspection",
+            category: "inspection",
+            image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format",
+            shortDesc: "Automated blade inspection using AI defect detection.",
+            fullDesc: "Complete inspection of 24 wind turbines in 3 days (traditional methods would take 3 weeks). Using AI-powered defect detection, we identified micro-cracks and erosion patterns with 95% accuracy, preventing potential failures.",
+            specs: ["Drone: Matrice 300", "Payload: Zenmuse H20T", "Defects: Micro cracks", "Report: Digital twin", "Time Saved: 80% reduction"]
+        }
+    ];
+
+    let currentFilter = 'all';
+
+    function renderGallery() {
+        const filtered = currentFilter === 'all' ? galleryData : galleryData.filter(item => item.category === currentFilter);
+        const galleryGrid = document.getElementById('gallery-grid');
+        
+        galleryGrid.innerHTML = filtered.map(item => `
+            <div class="gallery-card fade-in-up" data-id="${item.id}">
+                <img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy">
+                <div class="card-info">
+                    <span class="card-badge">${item.category.toUpperCase()}</span>
+                    <h3>${item.title}</h3>
+                    <p>${item.shortDesc}</p>
+                    <a href="gallery-detail.html?id=${item.id}" class="details-link">View Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.getAttribute('data-filter');
+            renderGallery();
+        });
+    });
+
+    // Theme Toggle (same as index)
+    const htmlEl = document.documentElement;
+    const desktopThemeBtn = document.getElementById('desktop-theme-toggle');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    const desktopIcon = document.getElementById('desktop-theme-icon');
+    const mobileIcon = document.getElementById('mobile-theme-icon');
+    const desktopRtl = document.getElementById('desktop-rtl-toggle');
+    const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+    let savedTheme = localStorage.getItem('theme') || 'light';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    
+    function updateIcons(theme) {
+        const iconClass = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        if (desktopIcon) desktopIcon.className = iconClass;
+        if (mobileIcon) mobileIcon.className = iconClass;
+    }
+    updateIcons(savedTheme);
+
+    function toggleTheme() {
+        let currentTheme = htmlEl.getAttribute('data-theme');
+        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        htmlEl.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcons(newTheme);
+    }
+
+    if (desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+    if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+
+    function toggleRtl() {
+        let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+        htmlEl.setAttribute('dir', dir);
+        localStorage.setItem('direction', dir);
+    }
+    if (desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+    if (mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+    // Dropdown functions
+    window.toggleDesktopDropdown = function(id) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        document.getElementById(id)?.classList.toggle('active');
+    };
+    window.toggleMobileDropdown = function(id) {
+        document.getElementById(id)?.classList.toggle('active');
+    };
+
+    // Mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-mobile-menu');
+    if (menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    if (closeBtn) closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    if (mobileMenu) mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
+
+    // Scroll to top
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => { if(scrollBtn) scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none'; });
+    if (scrollBtn) scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1280 && mobileMenu) mobileMenu.classList.remove('active'); });
+    
+    // Initial render
+    renderGallery();
+</script>
+
+<!-- Gallery Detail Page will be separate - gallery-detail.html -->
+</body>
+</html>

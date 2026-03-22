@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About AeroDrone - Professional drone pilots, our mission, story, and the experts behind aerial intelligence">
+    <title>AeroDrone | About Us - Black & Light Blue</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & VARIABLES (Black, White, Light Blue) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --btn-hover-bg: #FFFFFF;
+            --btn-hover-text: #0a0f1a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ----- NAVBAR (identical to index) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        .desktop-nav { display: none; align-items: center; gap: 0.25rem; }
+        .nav-link {
+            color: var(--text-muted);
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(74,158,255,0.3);
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 12px;
+        }
+        .dropdown-arrow { font-size: 0.7rem; transition: 0.2s; }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .navbar-right-desktop { display: none; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .mobile-menu-btn {
+            display: flex;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        /* mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+        }
+        .mobile-menu-close { color: var(--text-main); font-size: 2rem; background: none; border: none; cursor: pointer; }
+        .mobile-menu-items { padding: 1.5rem; }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-menu-item i { color: var(--accent-lightblue); margin-right: 1rem; width: 1.75rem; }
+        .mobile-dropdown { border-bottom: 1px solid var(--border-subtle); }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+        }
+        .mobile-dropdown-content.active { max-height: 200px; padding: 0.75rem 0; }
+        .mobile-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: var(--text-muted);
+        }
+        .mobile-dropdown-content a:hover { background-color: var(--accent-lightblue); color: var(--pure-white); }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-action-item i { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-separator { margin: 1rem 0; border-top: 2px solid var(--accent-lightblue); }
+
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+
+        /* ===== UNIQUE ABOUT PAGE STYLES ===== */
+        /* Hero Section with Banner Image */
+        .about-hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 700px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+        .about-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        .about-title span { color: var(--accent-lightblue); }
+        @media (min-width: 768px) { .about-title { font-size: 4.5rem; } }
+        .about-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        .hero-stats-grid {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            text-align: center;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-lightblue);
+        }
+        .hero-stat div:last-child { color: white; font-size: 0.875rem; }
+
+        /* Mission Vision Section - Split Layout */
+        .mission-vision {
+            padding: 5rem 0;
+            background: var(--bg-primary);
+        }
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .split-grid { grid-template-columns: 1fr 1fr; } }
+        .mission-card, .vision-card {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+        }
+        .mission-card:hover, .vision-card:hover {
+            border-color: var(--accent-lightblue);
+            transform: translateY(-5px);
+        }
+        .card-icon {
+            width: 4.5rem;
+            height: 4.5rem;
+            background: rgba(74,158,255,0.1);
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .card-icon i { font-size: 2rem; color: var(--accent-lightblue); }
+        .mission-card h3, .vision-card h3 { font-size: 1.75rem; margin-bottom: 1rem; }
+
+        /* Journey Timeline Section */
+        .journey-section {
+            background: var(--bg-secondary);
+            padding: 5rem 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-lightblue);
+            border-radius: 3px;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-year {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-lightblue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--pure-white);
+            z-index: 2;
+            flex-shrink: 0;
+        }
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            flex: 1;
+        }
+        .timeline-content h4 { margin-bottom: 0.5rem; color: var(--accent-lightblue); }
+
+        /* Values Section - Unique Card Grid with Icons */
+        .values-section {
+            padding: 5rem 0;
+            background: var(--bg-primary);
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 2rem;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+        }
+        .value-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-lightblue);
+        }
+        .value-icon {
+            width: 5rem;
+            height: 5rem;
+            background: linear-gradient(135deg, var(--accent-lightblue) 0%, rgba(74,158,255,0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .value-icon i { font-size: 2rem; color: var(--pure-white); }
+
+        /* NEW SECTION: Achievements & Certifications */
+        .achievements-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .achievements-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(74,158,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media (min-width: 992px) {
+            .achievements-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        /* Stats Counter Cards */
+        .stats-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            padding: 1.75rem;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: var(--accent-lightblue);
+            transform: translateY(-5px);
+        }
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--accent-lightblue);
+            margin-bottom: 1rem;
+        }
+        .stat-number-large {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-lightblue);
+            line-height: 1;
+        }
+        .stat-label-large {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+        /* Certifications List */
+        .certs-showcase {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid var(--border-subtle);
+        }
+        .certs-showcase h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .certs-showcase h3 i { color: var(--accent-lightblue); }
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: 0.2s;
+        }
+        .cert-item:hover {
+            padding-left: 0.5rem;
+            border-color: var(--accent-lightblue);
+        }
+        .cert-icon {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(74,158,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cert-icon i { font-size: 1.5rem; color: var(--accent-lightblue); }
+        .cert-info h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .cert-info p { font-size: 0.8rem; color: var(--text-muted); }
+        .award-badge {
+            display: inline-block;
+            background: var(--accent-lightblue);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            margin-top: 0.5rem;
+        }
+
+        /* CTA Section */
+        .about-cta {
+            background: linear-gradient(135deg, var(--accent-lightblue), #2d6fb0);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .about-cta h2 { color: white; font-size: 2rem; margin-bottom: 1rem; }
+        .about-cta p { color: rgba(255,255,255,0.9); margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-outline-white {
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--accent-lightblue);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            padding: 4rem 0 2rem 0;
+            border-top: 2px solid var(--accent-lightblue);
+        }
+        .footer-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+        @media (min-width:768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+        .footer .logo { margin-bottom: 0.5rem; }
+        .footer-heading { color: var(--accent-lightblue); margin-bottom: 1.25rem; font-weight: 700; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-muted); transition: 0.2s; }
+        .footer-links a:hover { color: var(--accent-lightblue); padding-left: 4px; }
+        .footer-input {
+            width: 100%; padding: 0.75rem 1rem; border-radius: 9999px; border: 1px solid var(--accent-lightblue);
+            background: var(--bg-primary); color: var(--text-main); margin-bottom: 0.75rem;
+        }
+        .footer-btn {
+            width: 100%; background-color: var(--accent-lightblue); color: var(--pure-white); padding: 0.75rem 1rem;
+            border-radius: 9999px; font-weight: 700; border: 1px solid var(--accent-lightblue); cursor: pointer;
+        }
+        .footer-btn:hover { background: transparent; color: var(--text-main); }
+        .copyright { border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; text-align: center; color: var(--text-muted); }
+        #scroll-top {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; width: 3rem; height: 3rem;
+            background-color: var(--accent-lightblue); color: var(--pure-white); border-radius: 50%;
+            cursor: pointer; display: none; z-index: 100; border: none;
+        }
+        #scroll-top:hover { background: transparent; color: var(--text-main); border: 1px solid var(--accent-lightblue); }
+        .fade-up { animation: fadeUp 0.6s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">light blue horizon</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown">
+                <span class="nav-link">Home <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link active">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="fleet.html" class="nav-link">Fleet</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="dropdown">
+                <span class="nav-link">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="client.html" class="dropdown-item">Client Login</a>
+                    <a href="admin.html" class="dropdown-item">Pilot Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <a href="join.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-plane"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">blue above</span></div></a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('home-mobile')"><span><i class="fas fa-home"></i> Home</span> <i class="fas fa-chevron-down"></i></button><div id="home-mobile" class="mobile-dropdown-content"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div></div>
+        <a href="about.html" class="mobile-menu-item"><i class="fas fa-users"></i> About</a>
+        <a href="services.html" class="mobile-menu-item"><i class="fas fa-camera"></i> Services</a>
+        <a href="fleet.html" class="mobile-menu-item"><i class="fas fa-drone"></i> Fleet</a>
+        <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
+        <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
+        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')"><span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i></button><div id="dashboard-mobile" class="mobile-dropdown-content"><a href="client.html">Client Login</a><a href="admin.html">Pilot Login</a></div></div>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- ABOUT HERO SECTION WITH BANNER IMAGE -->
+<section class="about-hero">
+    <img class="hero-bg-image" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop" alt="Drone flying over mountains at sunset">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="fade-up">
+            <span class="hero-badge"><i class="fas fa-drone"></i> Who We Are</span>
+            <h1 class="about-title">Beyond the <span>Horizon</span><br>Since 2018</h1>
+            <p class="about-subtitle">AeroDrone delivers professional aerial intelligence with precision, safety, and cinematic excellence. We're a team of certified pilots, engineers, and creatives.</p>
+            <div class="hero-stats-grid">
+                <div class="hero-stat"><div class="hero-stat-number">2,500+</div><div>Completed Flights</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">98%</div><div>Satisfaction Rate</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">24/7</div><div>Support</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MISSION & VISION - Split Layout -->
+<section class="mission-vision">
+    <div class="container">
+        <div class="split-grid">
+            <div class="mission-card">
+                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p style="color: var(--text-muted);">To revolutionize aerial data collection by combining cutting-edge drone technology with expert piloting, making professional aerial solutions accessible, safe, and impactful for industries worldwide.</p>
+            </div>
+            <div class="vision-card">
+                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p style="color: var(--text-muted);">To be the global leader in drone services, setting the standard for innovation, sustainability, and excellence in the unmanned aviation industry by 2030.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JOURNEY TIMELINE -->
+<section class="journey-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Journey ✈️</h2>
+            <p style="color: var(--text-muted);">Milestones that shaped AeroDrone</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-year">2018</div><div class="timeline-content"><h4>Foundation</h4><p>Started with 2 pilots and a vision to bring cinematic aerial photography to real estate.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">2020</div><div class="timeline-content"><h4>Expansion to Inspection</h4><p>Launched industrial inspection services with thermal and LiDAR drones.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-content"><h4>Training Academy</h4><p>Opened FAA-approved pilot training school with 150+ graduates.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-content"><h4>Global Reach</h4><p>Operating across 12 countries with 45 certified pilots and 500+ enterprise clients.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUES SECTION -->
+<section class="values-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Core Values</h2>
+            <p style="color: var(--text-muted);">What drives us every day</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card"><div class="value-icon"><i class="fas fa-shield-alt"></i></div><h3>Safety First</h3><p style="color:var(--text-muted);">Uncompromising safety protocols in every flight operation.</p></div>
+            <div class="value-card"><div class="value-icon"><i class="fas fa-rocket"></i></div><h3>Innovation</h3><p style="color:var(--text-muted);">Adopting the latest drone tech and AI-driven analytics.</p></div>
+            <div class="value-card"><div class="value-icon"><i class="fas fa-handshake"></i></div><h3>Integrity</h3><p style="color:var(--text-muted);">Transparent pricing, honest communication, and reliability.</p></div>
+            <div class="value-card"><div class="value-icon"><i class="fas fa-globe"></i></div><h3>Sustainability</h3><p style="color:var(--text-muted);">Eco-friendly electric fleet and minimal environmental impact.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- NEW SECTION: ACHIEVEMENTS & CERTIFICATIONS (Replaces Meet the Experts) -->
+<section class="achievements-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Achievements & Certifications 🏆</h2>
+            <p style="color: var(--text-muted);">Industry recognition and professional credentials</p>
+        </div>
+        <div class="achievements-grid">
+            <!-- Left: Stats & Numbers -->
+            <div>
+                <div class="stats-showcase">
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="stat-number-large">500+</div>
+                        <div class="stat-label-large">Enterprise Clients</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <div class="stat-number-large">15</div>
+                        <div class="stat-label-large">Industry Awards</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="stat-number-large">1,200+</div>
+                        <div class="stat-label-large">Pilots Trained</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <div class="stat-number-large">35+</div>
+                        <div class="stat-label-large">Countries Served</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Certifications & Badges -->
+            <div class="certs-showcase">
+                <h3><i class="fas fa-certificate"></i> Official Certifications</h3>
+                <div class="cert-item">
+                    <div class="cert-icon"><i class="fas fa-faa"></i></div>
+                    <div class="cert-info">
+                        <h4>FAA Part 107 Certified</h4>
+                        <p>Commercial drone operator license</p>
+                        <span class="award-badge">Authorized</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><i class="fas fa-hard-hat"></i></div>
+                    <div class="cert-info">
+                        <h4>ISO 9001:2024</h4>
+                        <p>Quality management systems certified</p>
+                        <span class="award-badge">Accredited</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><i class="fas fa-shield-virus"></i></div>
+                    <div class="cert-info">
+                        <h4>NIST Compliant</h4>
+                        <p>Cybersecurity & data protection standards</p>
+                        <span class="award-badge">Verified</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><i class="fas fa-leaf"></i></div>
+                    <div class="cert-info">
+                        <h4>Green Drone Initiative</h4>
+                        <p>Sustainable operations certification</p>
+                        <span class="award-badge">Eco-Certified</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><i class="fas fa-microchip"></i></div>
+                    <div class="cert-info">
+                        <h4>DJI Enterprise Partner</h4>
+                        <p>Authorized service & training center</p>
+                        <span class="award-badge">Gold Partner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="about-cta">
+    <div class="container">
+        <h2>Join Our Mission</h2>
+        <p>Become part of the future of aerial intelligence — whether as a pilot, partner, or client.</p>
+        <div class="cta-buttons">
+            <a href="#" class="login-btn" style="background: white; color: var(--accent-lightblue); border: none;">Explore Careers</a>
+            <a href="#" class="btn-outline-white">Contact Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Left column with exact same logo + tagline -->
+            <div class="footer-logo-block">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div>
+                        <div class="logo-text">Aero<span>Drone</span></div>
+                        <span class="logo-tagline">light blue horizon</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; max-width: 220px;">Drones are transforming the way we capture the world, offering stunning aerial views and precise control from the sky. </p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Fleet</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Stay Updated</h3>
+                <input class="footer-input" placeholder="Your email address">
+                <button class="footer-btn">Subscribe</button>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <i class="fab fa-instagram" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-youtube" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-linkedin" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 2025 AeroDrone — Black · White · Light Blue. All visions from above.
+        </div>
+    </div>
+</footer>
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    (function() {
+        const htmlEl = document.documentElement;
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle');
+        const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+        const desktopIcon = document.getElementById('desktop-theme-icon');
+        const mobileIcon = document.getElementById('mobile-theme-icon');
+        const desktopRtl = document.getElementById('desktop-rtl-toggle');
+        const mobileRtl = document.getElementById('mobile-rtl-toggle');
+        let savedTheme = localStorage.getItem('theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        function updateIcons(theme) { const icon = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; if(desktopIcon) desktopIcon.className = icon; if(mobileIcon) mobileIcon.className = icon; }
+        updateIcons(savedTheme);
+        function toggleTheme() { let current = htmlEl.getAttribute('data-theme'); let newTheme = current === 'dark' ? 'light' : 'dark'; htmlEl.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme); updateIcons(newTheme); }
+        if(desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+        if(mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+        function toggleRtl() { let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+        if(desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+        if(mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+        window.toggleMobileDropdown = function(id) { document.getElementById(id)?.classList.toggle('active'); };
+        const menuBtn = document.getElementById('mobile-menu-btn'), mobileMenu = document.getElementById('mobile-menu'), closeBtn = document.getElementById('close-mobile-menu');
+        if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        if(closeBtn) closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        const scrollBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => { if(scrollBtn) scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+        if(scrollBtn) scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        window.addEventListener('resize', () => { if(window.innerWidth >= 1280 && mobileMenu) mobileMenu.classList.remove('active'); });
+    })();
+</script>
+</body>
+</html>

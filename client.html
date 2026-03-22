@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Client Portal - AeroDrone Drone Services | Manage your bookings, flight logs, and pilot communications">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✈️%3C/text%3E%3C/svg%3E" />
+    <title>AeroDrone | Client Portal</title>
+    <!-- Tailwind + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* --- AeroDrone Theme (Black, White, Light Blue) - matching index.html --- */
+        :root, html[data-theme='light'] {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+            --shadow-sm: 0 8px 20px rgba(74, 158, 255, 0.12);
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-danger: #EF4444;
+            --color-info: #3B82F6;
+        }
+        html[data-theme='dark'] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --color-success: #059669;
+            --color-warning: #D97706;
+            --color-danger: #DC2626;
+            --color-info: #2563EB;
+        }
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        .text-accent { color: var(--accent-lightblue); }
+        .bg-background { background-color: var(--bg-primary); }
+        .text-primary-text { color: var(--text-main); }
+        .text-secondary-text { color: var(--text-muted); }
+        .border-border { border-color: var(--border-subtle); }
+        .card-bg { background-color: var(--card-bg); }
+        .bg-hover { background-color: var(--bg-secondary); }
+        .bg-success { background-color: var(--color-success); }
+        .bg-warning { background-color: var(--color-warning); }
+        .bg-danger { background-color: var(--color-danger); }
+        .bg-info { background-color: var(--color-info); }
+        .text-success { color: var(--color-success); }
+        .text-warning { color: var(--color-warning); }
+        .text-danger { color: var(--color-danger); }
+        .dashboard-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.5rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.08);
+        }
+        .dashboard-card:hover {
+            border-color: var(--accent-lightblue);
+            box-shadow: 0 12px 24px -12px rgba(74, 158, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .status-pulse {
+            width: 10px; height: 10px; background-color: var(--accent-lightblue); border-radius: 9999px;
+            box-shadow: 0 0 0 0 rgba(74, 158, 255, 0.5); animation: pulse2 2s infinite;
+        }
+        @keyframes pulse2 { 70% { box-shadow: 0 0 0 6px rgba(74, 158, 255, 0); } }
+        .sidebar-link {
+            display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
+            border-radius: 1rem; color: var(--text-muted); transition: all 0.2s ease;
+            font-weight: 500; margin-bottom: 0.25rem; white-space: nowrap; cursor: pointer;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: var(--accent-lightblue); color: #FFFFFF;
+        }
+        .sidebar-link:hover i, .sidebar-link.active i { color: white; }
+        .sidebar-link.logout:hover { background: #EF4444; color: white; }
+        html[dir="rtl"] .sidebar-link { flex-direction: row-reverse; }
+        html[dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .client-section { display: block; }
+        .bg-accent-gradient { background: linear-gradient(135deg, var(--accent-lightblue) 0%, #2c6eb0 100%); }
+        .flight-status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; }
+        .flight-status-badge.confirmed { background-color: var(--color-success); color: white; }
+        .flight-status-badge.pending { background-color: var(--color-warning); color: white; }
+        .flight-status-badge.completed { background-color: var(--color-info); color: white; }
+        .flight-status-badge.cancelled { background-color: var(--color-danger); color: white; }
+        #mobile-overlay { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; position: fixed; inset: 0; z-index: 55; }
+        #mobile-overlay.active { opacity: 1; pointer-events: auto; }
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 10px; }
+        .logo-icon-custom {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-text-custom {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text-custom span { color: var(--accent-lightblue); }
+        .logo-tagline-custom {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        /* Fix for icon alignment */
+        .sidebar-link i, .mobile-action-item i, .footer-links i {
+            width: 1.25rem;
+            text-align: center;
+        }
+        .user-avatar-icon {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body class="antialiased bg-background flex flex-col min-h-screen w-full">
+
+    <!-- TOP BAR - matching index.html style -->
+    <header class="border-b border-border bg-background sticky top-0 z-50 w-full" style="border-bottom: 2px solid var(--accent-lightblue);">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <button id="mobile-menu-toggle" class="lg:hidden p-2 -ml-2 rounded-xl hover:bg-hover transition text-primary-text">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+                    <div class="logo-icon-custom"><i class="fas fa-plane" style="font-size: 2rem; color: var(--accent-lightblue);"></i></div>
+                    <div class="leading-tight">
+                        <span class="logo-text-custom">Aero<span>Drone</span></span>
+                        <span class="logo-tagline-custom">light blue horizon</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0 rtl:flex-row-reverse">
+               
+
+                <button id="lang-toggle" class="p-2 rounded-full hover:bg-hover transition text-primary-text" title="Toggle RTL/LTR">
+                    <i class="fas fa-right-left text-lg"></i>
+                </button>
+
+                <button id="theme-toggle-client" class="p-2 rounded-full hover:bg-hover transition text-primary-text">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-overlay" class="lg:hidden"></div>
+
+    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-6 flex-grow w-full relative">
+        <div class="flex flex-col lg:flex-row gap-6 xl:gap-10">
+            
+            <!-- SIDEBAR - Client Portal Navigation -->
+            <aside id="sidebar-container" class="fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 xl:w-80 z-[60] lg:z-10 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-sidebar lg:bg-transparent lg:flex-shrink-0">
+                <div class="dashboard-card p-5 lg:sticky lg:top-24 bg-card-bg h-full lg:h-auto border lg:border-border lg:rounded-2xl rounded-none shadow-none lg:shadow-md overflow-y-auto">
+                    
+                    <div class="flex lg:hidden justify-between items-center mb-6 px-2">
+                        <div class="flex items-center gap-2 text-accent">
+                            <i class="fas fa-bars-staggered"></i>
+                            <span class="text-xs font-black uppercase tracking-widest">Client Menu</span>
+                        </div>
+                        <button id="close-sidebar" class="p-2 hover:bg-hover rounded-lg text-primary-text">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 pb-5 mb-4 border-b border-border">
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xl border border-accent/30">
+                             <i class="fas fa-user-astronaut text-sm user-avatar-icon" style="color: var(--accent-lightblue);"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="font-bold text-primary-text truncate">Alex Morgan</p>
+                            <p class="text-[11px] sm:text-xs text-secondary-text flex items-center gap-1 mt-1">
+                                <span class="inline-block w-2 h-2 bg-emerald-400 rounded-full"></span> verified client
+                            </p>
+                        </div>
+                    </div>
+
+                    <nav class="flex flex-col gap-1">
+                        <p class="text-[10px] uppercase tracking-widest text-secondary-text font-black mt-2 mb-2 px-2">Dashboard</p>
+                        <a href="#" onclick="activateSection('overview')" data-section="overview" class="sidebar-link active">
+                            <i class="fas fa-chart-line w-5"></i>
+                            <span>Flight Overview</span>
+                        </a>
+                        <a href="#" onclick="activateSection('bookings')" data-section="bookings" class="sidebar-link">
+                            <i class="fas fa-calendar-alt w-5"></i>
+                            <span>My Bookings</span>
+                        </a>
+                        <a href="#" onclick="activateSection('flights')" data-section="flights" class="sidebar-link">
+                            <i class="fas fa-history w-5"></i>
+                            <span>Flight History</span>
+                        </a>
+                        <a href="#" onclick="activateSection('messages')" data-section="messages" class="sidebar-link">
+                            <i class="fas fa-comment-dots w-5"></i>
+                            <span>Messages</span>
+                            <span class="ml-auto bg-accent-lightblue text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+                        </a>
+                        <a href="#" onclick="activateSection('invoices')" data-section="invoices" class="sidebar-link">
+                            <i class="fas fa-file-invoice-dollar w-5"></i>
+                            <span>Invoices</span>
+                        </a>
+                        <a href="#" onclick="activateSection('settings')" data-section="settings" class="sidebar-link">
+                            <i class="fas fa-sliders w-5"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" id="logout-button" class="sidebar-link logout mt-2" style="color: var(--color-danger);">
+                            <i class="fas fa-power-off w-5"></i>
+                            <span>Logout</span>
+                        </a>
+                    </nav>
+
+                    <div class="mt-8 pt-4 border-t border-border text-[11px] text-secondary-text">
+                        <div class="flex justify-between"><span>Preferred Pilot</span><span class="font-bold text-accent">Captain Chen</span></div>
+                        <div class="flex justify-between mt-1.5"><span>Member since</span><span class="font-medium">Jan 2024</span></div>
+                        <div class="flex justify-between mt-1.5"><span>Total flights</span><span class="font-medium text-accent">12</span></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CONTENT AREA -->
+            <div class="flex-1 min-w-0">
+
+                <!-- OVERVIEW SECTION -->
+                <div id="overview" class="client-section">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h2 class="text-2xl sm:text-3xl font-black mb-2">Welcome back, Alex</h2>
+                                <p class="text-white/80 text-sm">Your next flight is scheduled for tomorrow at 2:30 PM</p>
+                            </div>
+                            <button class="bg-white/20 backdrop-blur-sm px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-white/30 transition">
+                                <i class="fas fa-plus mr-1"></i> Book New Flight
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-6">
+                        <div class="dashboard-card p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <i class="fas fa-calendar-check text-2xl text-accent"></i>
+                                <span class="text-xs text-secondary-text">upcoming</span>
+                            </div>
+                            <p class="text-3xl font-black">1</p>
+                            <p class="text-sm text-secondary-text mt-1">Upcoming Flights</p>
+                        </div>
+                        <div class="dashboard-card p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <i class="fas fa-clock text-2xl text-accent"></i>
+                                <span class="text-xs text-secondary-text">this month</span>
+                            </div>
+                            <p class="text-3xl font-black">3</p>
+                            <p class="text-sm text-secondary-text mt-1">Flights Completed</p>
+                        </div>
+                        <div class="dashboard-card p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <i class="fas fa-dollar-sign text-2xl text-accent"></i>
+                                <span class="text-xs text-secondary-text">total spent</span>
+                            </div>
+                            <p class="text-3xl font-black">$1,247</p>
+                            <p class="text-sm text-secondary-text mt-1">Lifetime Value</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card p-6">
+                        <h3 class="font-black text-lg mb-4 flex items-center gap-2"><i class="fas fa-drone text-accent"></i> Upcoming Flight Details</h3>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-hover rounded-2xl">
+                            <div>
+                                <p class="font-bold text-lg">Aerial Survey - Bay Bridge Project</p>
+                                <p class="text-sm text-secondary-text mt-1"><i class="fas fa-calendar mr-1"></i> March 23, 2026 · 2:30 PM</p>
+                                <p class="text-sm text-secondary-text"><i class="fas fa-map-marker-alt mr-1"></i> San Francisco, CA</p>
+                            </div>
+                            <span class="flight-status-badge confirmed mt-3 sm:mt-0">confirmed</span>
+                        </div>
+                        <div class="mt-4 flex gap-3">
+                            <button class="bg-accent-lightblue text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">Reschedule</button>
+                            <button class="border border-border px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOOKINGS SECTION -->
+                <div id="bookings" class="client-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-black mb-6 flex items-center gap-2"><i class="fas fa-calendar-alt text-accent"></i> My Active Bookings</h2>
+                        <div class="space-y-4">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div>
+                                    <p class="font-bold">Industrial Inspection - Solar Farm</p>
+                                    <p class="text-xs text-secondary-text mt-1">March 28, 2026 · 10:00 AM · Pilot: Marcus W.</p>
+                                    <p class="text-xs text-accent font-semibold mt-1">Duration: 2 hours | Thermal Imaging</p>
+                                </div>
+                                <span class="flight-status-badge pending mt-3 sm:mt-0">pending confirmation</span>
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div>
+                                    <p class="font-bold">Real Estate Photography - Hillside Estate</p>
+                                    <p class="text-xs text-secondary-text mt-1">April 5, 2026 · 3:00 PM · Pilot: James Chen</p>
+                                    <p class="text-xs text-accent font-semibold mt-1">4K Cinematic | 30 min flight</p>
+                                </div>
+                                <span class="flight-status-badge confirmed mt-3 sm:mt-0">confirmed</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <button class="bg-accent-lightblue text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider"><i class="fas fa-plus mr-2"></i>Request New Booking</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FLIGHT HISTORY SECTION -->
+                <div id="flights" class="client-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-black mb-6 flex items-center gap-2"><i class="fas fa-history text-accent"></i> Flight History</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div><p class="font-bold">Mapping Project - Downtown Area</p><p class="text-xs text-secondary-text">March 10, 2026 · 2h 15min</p></div>
+                                <span class="flight-status-badge completed">completed</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div><p class="font-bold">Inspection - Wind Turbine #4</p><p class="text-xs text-secondary-text">February 22, 2026 · 45min</p></div>
+                                <span class="flight-status-badge completed">completed</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div><p class="font-bold">Aerial Photography - Wedding Shoot</p><p class="text-xs text-secondary-text">February 14, 2026 · 1h 30min</p></div>
+                                <span class="flight-status-badge completed">completed</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <button class="text-accent text-sm font-semibold">View All 12 Flights <i class="fas fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MESSAGES SECTION -->
+                <div id="messages" class="client-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-black mb-6 flex items-center gap-2"><i class="fas fa-comment text-accent"></i> Messages from Pilots</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 p-4 bg-hover rounded-2xl border-l-4 border-accent">
+                                <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-user-pilot text-accent"></i></div>
+                                <div class="flex-1"><p class="font-bold">Captain James Chen</p><p class="text-xs text-secondary-text">"Your flight for tomorrow is confirmed. Please arrive 15 mins early for briefing."</p></div>
+                                <span class="text-[9px] text-secondary-text">2h ago</span>
+                            </div>
+                            <div class="flex items-start gap-3 p-4 bg-hover rounded-2xl">
+                                <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-user-pilot text-accent"></i></div>
+                                <div class="flex-1"><p class="font-bold">Pilot Marcus W.</p><p class="text-xs text-secondary-text">"Please confirm the survey area coordinates for March 28th."</p></div>
+                                <span class="text-[9px] text-secondary-text">1d ago</span>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex gap-2"><input type="text" placeholder="Type your message..." class="flex-1 bg-hover border border-border rounded-full px-4 py-2 text-sm outline-none focus:border-accent"><button class="bg-accent-lightblue text-white px-5 rounded-full"><i class="fas fa-paper-plane"></i></button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INVOICES SECTION -->
+                <div id="invoices" class="client-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-black mb-6 flex items-center gap-2"><i class="fas fa-file-invoice text-accent"></i> Billing & Invoices</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div><p class="font-bold">INV-2026-042 · Aerial Survey</p><p class="text-xs text-secondary-text">March 10, 2026 · $349.00</p></div>
+                                <span class="text-success text-sm font-bold"><i class="fas fa-check-circle"></i> Paid</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div><p class="font-bold">INV-2026-038 · Real Estate Package</p><p class="text-xs text-secondary-text">February 22, 2026 · $499.00</p></div>
+                                <span class="text-success text-sm font-bold"><i class="fas fa-check-circle"></i> Paid</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <div><p class="font-bold">INV-2026-051 · Upcoming Flight</p><p class="text-xs text-secondary-text">March 23, 2026 · $279.00</p></div>
+                                <span class="text-warning text-sm font-bold"><i class="fas fa-clock"></i> Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS SECTION -->
+                <div id="settings" class="client-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-black mb-6 flex items-center gap-2"><i class="fas fa-sliders text-accent"></i> Account Settings</h2>
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <span class="font-bold">Email Notifications (flight updates)</span>
+                                <div class="w-12 h-6 bg-accent-lightblue rounded-full p-1 cursor-pointer"><span class="block w-4 h-4 bg-white rounded-full ml-auto"></span></div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <span class="font-bold">SMS Alerts for Schedule Changes</span>
+                                <div class="w-12 h-6 bg-accent-lightblue rounded-full p-1 cursor-pointer"><span class="block w-4 h-4 bg-white rounded-full ml-auto"></span></div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
+                                <span class="font-bold">Preferred Drone Model (Mavic 3 Pro)</span>
+                                <select class="bg-transparent border border-border rounded-full px-3 py-1 text-sm"><option>Mavic 3 Pro</option><option>Inspire 3</option><option>Agras T40</option></select>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-border">
+                            <button class="bg-danger text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="mt-12 text-center text-[10px] text-secondary-text border-t border-border pt-8 pb-12">
+                    <p class="uppercase tracking-[0.3em] font-black opacity-40">© 2026 AeroDrone — Precision Aerial Intelligence</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            const htmlEl = document.documentElement;
+
+            // mobile menu
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const closeSidebar = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('sidebar-container');
+            const overlay = document.getElementById('mobile-overlay');
+
+            function toggleMobileMenu(isOpen) {
+                if (isOpen) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            if (menuToggle) menuToggle.addEventListener('click', () => toggleMobileMenu(true));
+            if (closeSidebar) closeSidebar.addEventListener('click', () => toggleMobileMenu(false));
+            if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
+
+            // Theme toggle - matching index.html style
+            const themeBtn = document.getElementById('theme-toggle-client');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            function setTheme(theme) {
+                htmlEl.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (themeIcon) {
+                    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            
+            if (themeBtn) {
+                themeBtn.addEventListener('click', () => {
+                    const current = htmlEl.getAttribute('data-theme');
+                    setTheme(current === 'light' ? 'dark' : 'light');
+                });
+            }
+
+            // RTL toggle - matching index.html style
+            const langBtn = document.getElementById('lang-toggle');
+            function setDirection(dir) {
+                htmlEl.setAttribute('dir', dir);
+                localStorage.setItem('direction', dir);
+            }
+            const savedDir = localStorage.getItem('direction') || 'ltr';
+            setDirection(savedDir);
+            if (langBtn) {
+                langBtn.addEventListener('click', () => {
+                    const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+                    setDirection(currentDir === 'ltr' ? 'rtl' : 'ltr');
+                });
+            }
+
+            // reveal animation
+            function checkReveal() {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+                });
+            }
+            window.addEventListener('scroll', checkReveal);
+            window.addEventListener('load', checkReveal);
+
+            // section activation
+            const sections = ['overview', 'bookings', 'flights', 'messages', 'invoices', 'settings'];
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            
+            window.activateSection = function(sectionId) {
+                sections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) activeSection.classList.remove('hidden');
+                
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.section === sectionId) link.classList.add('active');
+                });
+                if (window.innerWidth < 1024) toggleMobileMenu(false);
+            };
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (link.dataset.section) activateSection(link.dataset.section);
+                });
+            });
+            
+            // LOGOUT BUTTON - redirect to login.html
+            const logoutBtn = document.getElementById('logout-button');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Clear any stored session data if needed
+                    localStorage.removeItem('clientLoggedIn');
+                    // Redirect to login.html
+                    window.location.href = 'login.html';
+                });
+            }
+            
+            activateSection('overview');
+        })();
+    </script>
+</body>
+</html>

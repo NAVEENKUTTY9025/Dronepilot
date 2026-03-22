@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AeroDrone Drone Services Pricing - Transparent pricing for aerial photography, inspections, mapping, training, and enterprise solutions">
+    <title>AeroDrone | Pricing - Affordable Drone Service Plans</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & VARIABLES (Black, White, Light Blue) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --btn-hover-bg: #FFFFFF;
+            --btn-hover-text: #0a0f1a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ----- NAVBAR ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        .desktop-nav { display: none; align-items: center; gap: 0.25rem; }
+        .nav-link {
+            color: var(--text-muted);
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(74,158,255,0.3);
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 12px;
+        }
+        .dropdown-arrow { font-size: 0.7rem; transition: 0.2s; }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .navbar-right-desktop { display: none; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .mobile-menu-btn {
+            display: flex;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+        }
+        .mobile-menu-close { color: var(--text-main); font-size: 2rem; background: none; border: none; cursor: pointer; }
+        .mobile-menu-items { padding: 1.5rem; }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-menu-item i { color: var(--accent-lightblue); margin-right: 1rem; width: 1.75rem; }
+        .mobile-dropdown { border-bottom: 1px solid var(--border-subtle); }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+        }
+        .mobile-dropdown-content.active { max-height: 200px; padding: 0.75rem 0; }
+        .mobile-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: var(--text-muted);
+        }
+        .mobile-dropdown-content a:hover { background-color: var(--accent-lightblue); color: var(--pure-white); }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-action-item i { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-separator { margin: 1rem 0; border-top: 2px solid var(--accent-lightblue); }
+
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+
+        /* ===== PRICING PAGE UNIQUE STYLES ===== */
+        /* Hero Section */
+        .pricing-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .pricing-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .pricing-title span { color: var(--accent-lightblue); }
+        @media (min-width: 768px) { .pricing-title { font-size: 4rem; } }
+        .pricing-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Billing Toggle */
+        .billing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+        }
+        .billing-option {
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .billing-option.active {
+            color: var(--accent-lightblue);
+            font-weight: 700;
+        }
+        .toggle-switch {
+            width: 60px;
+            height: 32px;
+            background: var(--border-subtle);
+            border-radius: 32px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-switch.active {
+            background: var(--accent-lightblue);
+        }
+        .toggle-slider {
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: 0.3s;
+        }
+        .toggle-switch.active .toggle-slider {
+            left: 31px;
+        }
+        .save-badge {
+            background: var(--accent-lightblue);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            margin-left: 0.5rem;
+        }
+
+        /* Main Pricing Cards */
+        .pricing-main {
+            padding: 3rem 0 5rem;
+            background: var(--bg-primary);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .pricing-grid { grid-template-columns: repeat(4, 1fr); } }
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .pricing-card.popular {
+            border: 2px solid var(--accent-lightblue);
+            transform: scale(1.02);
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-lightblue);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-lightblue);
+        }
+        .pricing-card.popular:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        .plan-icon {
+            width: 4rem;
+            height: 4rem;
+            background: rgba(74,158,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .plan-icon i { font-size: 2rem; color: var(--accent-lightblue); }
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-lightblue);
+            margin: 1rem 0;
+        }
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .plan-description {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .plan-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .plan-features li i {
+            color: var(--accent-lightblue);
+            width: 1.25rem;
+        }
+        .plan-features li.disabled {
+            opacity: 0.5;
+        }
+        .plan-features li.disabled i {
+            color: var(--text-muted);
+        }
+        .pricing-btn {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 9999px;
+            background: transparent;
+            border: 2px solid var(--accent-lightblue);
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
+        }
+        .pricing-btn:hover {
+            background: var(--accent-lightblue);
+            color: white;
+        }
+        .pricing-btn.primary {
+            background: var(--accent-lightblue);
+            color: white;
+        }
+        .pricing-btn.primary:hover {
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        /* Drone Rental Section */
+        .rental-section {
+            background: var(--bg-secondary);
+            padding: 5rem 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .rental-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { .rental-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .rental-grid { grid-template-columns: repeat(3, 1fr); } }
+        .rental-card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: 0.3s;
+        }
+        .rental-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-lightblue);
+        }
+        .rental-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .rental-info {
+            padding: 1.5rem;
+        }
+        .rental-info h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .rental-price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--accent-lightblue);
+            margin: 0.75rem 0;
+        }
+        .rental-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
+        .rental-features {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .rental-feature {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(74,158,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+        }
+        .rental-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            background: var(--accent-lightblue);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
+        }
+        .rental-btn:hover {
+            background: transparent;
+            border: 1px solid var(--accent-lightblue);
+            color: var(--text-main);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            background: var(--bg-primary);
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .faq-question:hover {
+            background: rgba(74,158,255,0.05);
+        }
+        .faq-question i {
+            color: var(--accent-lightblue);
+            transition: 0.2s;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.25rem;
+            color: var(--text-muted);
+            border-top: none;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 1.25rem 1.25rem 1.25rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Volume Discount Section */
+        .discount-section {
+            background: linear-gradient(135deg, var(--accent-lightblue), #2d6fb0);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .discount-section h2 { color: white; font-size: 2rem; margin-bottom: 1rem; }
+        .discount-section p { color: rgba(255,255,255,0.9); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .discount-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.75rem 2rem;
+            border-radius: 100px;
+            color: white;
+            font-weight: 600;
+        }
+        .cta-btn {
+            background: white;
+            color: var(--accent-lightblue);
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 2rem;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-primary);
+            padding: 4rem 0 2rem 0;
+            border-top: 2px solid var(--accent-lightblue);
+        }
+        .footer-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+        @media (min-width:768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+        .footer .logo { margin-bottom: 0.5rem; }
+        .footer-heading { color: var(--accent-lightblue); margin-bottom: 1.25rem; font-weight: 700; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-muted); transition: 0.2s; }
+        .footer-links a:hover { color: var(--accent-lightblue); padding-left: 4px; }
+        .footer-input {
+            width: 100%; padding: 0.75rem 1rem; border-radius: 9999px; border: 1px solid var(--accent-lightblue);
+            background: var(--bg-primary); color: var(--text-main); margin-bottom: 0.75rem;
+        }
+        .footer-btn {
+            width: 100%; background-color: var(--accent-lightblue); color: var(--pure-white); padding: 0.75rem 1rem;
+            border-radius: 9999px; font-weight: 700; border: 1px solid var(--accent-lightblue); cursor: pointer;
+        }
+        .footer-btn:hover { background: transparent; color: var(--text-main); }
+        .copyright { border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; text-align: center; color: var(--text-muted); }
+        #scroll-top {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; width: 3rem; height: 3rem;
+            background-color: var(--accent-lightblue); color: var(--pure-white); border-radius: 50%;
+            cursor: pointer; display: none; z-index: 100; border: none;
+        }
+        #scroll-top:hover { background: transparent; color: var(--text-main); border: 1px solid var(--accent-lightblue); }
+        .fade-up { animation: fadeUp 0.6s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">light blue horizon</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown">
+                <span class="nav-link">Home <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="fleet.html" class="nav-link">Fleet</a>
+            <a href="pricing.html" class="nav-link active">Pricing</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="dropdown">
+                <span class="nav-link">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="client.html" class="dropdown-item">Client Login</a>
+                    <a href="admin.html" class="dropdown-item">Pilot Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <a href="join.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-plane"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">blue above</span></div></a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('home-mobile')"><span><i class="fas fa-home"></i> Home</span> <i class="fas fa-chevron-down"></i></button><div id="home-mobile" class="mobile-dropdown-content"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div></div>
+        <a href="about.html" class="mobile-menu-item"><i class="fas fa-users"></i> About</a>
+        <a href="services.html" class="mobile-menu-item"><i class="fas fa-camera"></i> Services</a>
+        <a href="fleet.html" class="mobile-menu-item"><i class="fas fa-drone"></i> Fleet</a>
+        <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
+        <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
+        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')"><span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i></button><div id="dashboard-mobile" class="mobile-dropdown-content"><a href="client.html">Client Login</a><a href="admin.html">Pilot Login</a></div></div>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- PRICING HERO SECTION -->
+<section class="pricing-hero">
+    <div class="container hero-content">
+        <div class="fade-up">
+            <span class="hero-badge"><i class="fas fa-tag"></i> Transparent Pricing</span>
+            <h1 class="pricing-title">Simple, <span>Fair</span> Pricing</h1>
+            <p class="pricing-subtitle">Choose the perfect plan for your aerial needs. No hidden fees, just professional drone services at competitive rates.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN PRICING CARDS -->
+<section class="pricing-main">
+    <div class="container">
+        <div class="billing-toggle">
+            <span class="billing-option active" id="monthly-option">Monthly</span>
+            <div class="toggle-switch" id="billing-toggle">
+                <div class="toggle-slider"></div>
+            </div>
+            <span class="billing-option" id="yearly-option">Yearly <span class="save-badge">Save 20%</span></span>
+        </div>
+
+        <div class="pricing-grid" id="pricing-grid">
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+                <div class="plan-icon"><i class="fas fa-drone"></i></div>
+                <h3 class="plan-name">Basic</h3>
+                <div class="plan-price"><span class="price-monthly">$299</span><span class="price-yearly" style="display:none;">$239</span><span>/mo</span></div>
+                <p class="plan-description">Perfect for small projects and occasional needs</p>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> 2 Flight Hours per month</li>
+                    <li><i class="fas fa-check"></i> 4K Video & Photos</li>
+                    <li><i class="fas fa-check"></i> Basic Editing</li>
+                    <li><i class="fas fa-check"></i> 5-Day Delivery</li>
+                    <li><i class="fas fa-check"></i> Email Support</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Thermal Imaging</li>
+                </ul>
+                <button class="pricing-btn">Choose Plan</button>
+            </div>
+
+            <!-- Professional Plan (Popular) -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="plan-icon"><i class="fas fa-rocket"></i></div>
+                <h3 class="plan-name">Professional</h3>
+                <div class="plan-price"><span class="price-monthly">$699</span><span class="price-yearly" style="display:none;">$559</span><span>/mo</span></div>
+                <p class="plan-description">Ideal for businesses and regular projects</p>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> 10 Flight Hours per month</li>
+                    <li><i class="fas fa-check"></i> 8K HDR + Thermal Imaging</li>
+                    <li><i class="fas fa-check"></i> Advanced Editing & Color Grading</li>
+                    <li><i class="fas fa-check"></i> 24-Hour Priority Delivery</li>
+                    <li><i class="fas fa-check"></i> Priority Support + Phone</li>
+                    <li><i class="fas fa-check"></i> FAA Certified Pilot</li>
+                </ul>
+                <button class="pricing-btn primary">Choose Plan</button>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <div class="plan-icon"><i class="fas fa-chart-line"></i></div>
+                <h3 class="plan-name">Enterprise</h3>
+                <div class="plan-price"><span class="price-monthly">$1,499</span><span class="price-yearly" style="display:none;">$1,199</span><span>/mo</span></div>
+                <p class="plan-description">For large-scale operations and enterprises</p>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Unlimited Flight Hours</li>
+                    <li><i class="fas fa-check"></i> LiDAR + Multispectral</li>
+                    <li><i class="fas fa-check"></i> Custom Analytics & Reports</li>
+                    <li><i class="fas fa-check"></i> Same-Day Delivery</li>
+                    <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
+                    <li><i class="fas fa-check"></i> API Integration Available</li>
+                </ul>
+                <button class="pricing-btn">Contact Sales</button>
+            </div>
+
+            <!-- Training Plan -->
+            <div class="pricing-card">
+                <div class="plan-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="plan-name">Pilot Training</h3>
+                <div class="plan-price"><span class="price-monthly">$899</span><span class="price-yearly" style="display:none;">$719</span><span>/course</span></div>
+                <p class="plan-description">Become a certified commercial drone pilot</p>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> FAA Part 107 Prep Course</li>
+                    <li><i class="fas fa-check"></i> 20 Hours Flight Training</li>
+                    <li><i class="fas fa-check"></i> Simulator Sessions</li>
+                    <li><i class="fas fa-check"></i> Exam Voucher Included</li>
+                    <li><i class="fas fa-check"></i> Lifetime Support</li>
+                    <li><i class="fas fa-check"></i> Job Placement Assistance</li>
+                </ul>
+                <button class="pricing-btn">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DRONE RENTAL SECTION -->
+<section class="rental-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Drone Rentals <i class="fas fa-calendar-alt"></i></h2>
+            <p>Need a drone for a short-term project? Rent our professional equipment</p>
+        </div>
+        <div class="rental-grid">
+            <div class="rental-card">
+                <img class="rental-img" src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?q=80&w=2070&auto=format&fit=crop" alt="DJI Inspire 3">
+                <div class="rental-info">
+                    <h3>DJI Inspire 3</h3>
+                    <div class="rental-price">$499 <span>/day</span></div>
+                    <div class="rental-features">
+                        <span class="rental-feature">8K Cinema</span>
+                        <span class="rental-feature">Full-frame</span>
+                        <span class="rental-feature">45min flight</span>
+                    </div>
+                    <button class="rental-btn">Book Now</button>
+                </div>
+            </div>
+            <div class="rental-card">
+                <img class="rental-img" src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2070&auto=format&fit=crop" alt="DJI Mavic 3E">
+                <div class="rental-info">
+                    <h3>DJI Mavic 3E</h3>
+                    <div class="rental-price">$349 <span>/day</span></div>
+                    <div class="rental-features">
+                        <span class="rental-feature">Thermal + RTK</span>
+                        <span class="rental-feature">56x Zoom</span>
+                        <span class="rental-feature">Enterprise</span>
+                    </div>
+                    <button class="rental-btn">Book Now</button>
+                </div>
+            </div>
+            <div class="rental-card">
+                <img class="rental-img" src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop" alt="Agras T40">
+                <div class="rental-info">
+                    <h3>Agras T40</h3>
+                    <div class="rental-price">$699 <span>/day</span></div>
+                    <div class="rental-features">
+                        <span class="rental-feature">40L Capacity</span>
+                        <span class="rental-feature">Smart Spraying</span>
+                        <span class="rental-feature">Agriculture</span>
+                    </div>
+                    <button class="rental-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VOLUME DISCOUNT SECTION -->
+<section class="discount-section">
+    <div class="container">
+        <h2>Bulk Projects? Get Volume Discounts</h2>
+        <p>Need multiple flights, ongoing inspections, or enterprise-wide solutions? We offer custom pricing for large-scale projects.</p>
+        <div class="discount-badge">
+            <i class="fas fa-percent"></i> Save up to 30% on bulk bookings
+        </div>
+        <button class="cta-btn" onclick="window.location.href='contact.html'">Request Custom Quote →</button>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Got questions? We've got answers</p>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What's included in the monthly plans?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">All monthly plans include flight time, professional pilot services, post-processing, and delivery. Flight hours reset monthly and unused hours do not roll over.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you offer one-time project pricing?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Yes! We offer custom quotes for one-time projects. Contact our sales team with your requirements for a free estimate.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What areas do you serve?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">We operate nationwide across all 50 states with remote pilots. International projects available upon request.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I cancel or change my plan?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Absolutely! You can upgrade, downgrade, or cancel your subscription at any time with 30-day notice. No long-term contracts.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Are your pilots certified and insured?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">All our pilots are FAA Part 107 certified, fully insured, and undergo rigorous safety training. We carry $2M liability insurance.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Left column with exact same logo + tagline -->
+            <div class="footer-logo-block">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div>
+                        <div class="logo-text">Aero<span>Drone</span></div>
+                        <span class="logo-tagline">light blue horizon</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; max-width: 220px;">Drones are transforming the way we capture the world, offering stunning aerial views and precise control from the sky. </p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Fleet</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Stay Updated</h3>
+                <input class="footer-input" placeholder="Your email address">
+                <button class="footer-btn">Subscribe</button>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <i class="fab fa-instagram" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-youtube" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-linkedin" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 2025 AeroDrone — Black · White · Light Blue. All visions from above.
+        </div>
+    </div>
+</footer>
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    (function() {
+        const htmlEl = document.documentElement;
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle');
+        const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+        const desktopIcon = document.getElementById('desktop-theme-icon');
+        const mobileIcon = document.getElementById('mobile-theme-icon');
+        const desktopRtl = document.getElementById('desktop-rtl-toggle');
+        const mobileRtl = document.getElementById('mobile-rtl-toggle');
+        let savedTheme = localStorage.getItem('theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        function updateIcons(theme) { const icon = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; if(desktopIcon) desktopIcon.className = icon; if(mobileIcon) mobileIcon.className = icon; }
+        updateIcons(savedTheme);
+        function toggleTheme() { let current = htmlEl.getAttribute('data-theme'); let newTheme = current === 'dark' ? 'light' : 'dark'; htmlEl.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme); updateIcons(newTheme); }
+        if(desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+        if(mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+        function toggleRtl() { let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+        if(desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+        if(mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+        window.toggleMobileDropdown = function(id) { document.getElementById(id)?.classList.toggle('active'); };
+        const menuBtn = document.getElementById('mobile-menu-btn'), mobileMenu = document.getElementById('mobile-menu'), closeBtn = document.getElementById('close-mobile-menu');
+        if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        if(closeBtn) closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        const scrollBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => { if(scrollBtn) scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+        if(scrollBtn) scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        window.addEventListener('resize', () => { if(window.innerWidth >= 1280 && mobileMenu) mobileMenu.classList.remove('active'); });
+
+        // Billing Toggle Functionality
+        let isYearly = false;
+        const toggleSwitch = document.getElementById('billing-toggle');
+        const monthlyOption = document.getElementById('monthly-option');
+        const yearlyOption = document.getElementById('yearly-option');
+        const monthlyPrices = document.querySelectorAll('.price-monthly');
+        const yearlyPrices = document.querySelectorAll('.price-yearly');
+
+        function updateBilling(showYearly) {
+            if (showYearly) {
+                monthlyPrices.forEach(price => price.style.display = 'none');
+                yearlyPrices.forEach(price => price.style.display = 'inline');
+                toggleSwitch.classList.add('active');
+                monthlyOption.classList.remove('active');
+                yearlyOption.classList.add('active');
+                isYearly = true;
+            } else {
+                monthlyPrices.forEach(price => price.style.display = 'inline');
+                yearlyPrices.forEach(price => price.style.display = 'none');
+                toggleSwitch.classList.remove('active');
+                monthlyOption.classList.add('active');
+                yearlyOption.classList.remove('active');
+                isYearly = false;
+            }
+        }
+
+        if (toggleSwitch) {
+            toggleSwitch.addEventListener('click', () => updateBilling(!isYearly));
+        }
+        if (monthlyOption) monthlyOption.addEventListener('click', () => updateBilling(false));
+        if (yearlyOption) yearlyOption.addEventListener('click', () => updateBilling(true));
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    })();
+</script>
+</body>
+</html>

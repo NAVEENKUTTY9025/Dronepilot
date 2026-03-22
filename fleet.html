@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our professional drone fleet – aerial photography, inspection, mapping drones available for hire">
+    <title>AeroDrone | Our Elite Fleet – Professional Drones for Every Mission</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & VARIABLES (Black, White, Light Blue) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ----- NAVBAR ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        .desktop-nav { display: none; align-items: center; gap: 0.25rem; }
+        .nav-link {
+            color: var(--text-muted);
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(74,158,255,0.3);
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 12px;
+        }
+        .dropdown-arrow { font-size: 0.7rem; transition: 0.2s; }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .navbar-right-desktop { display: none; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .mobile-menu-btn {
+            display: flex;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+        }
+        .mobile-menu-close { color: var(--text-main); font-size: 2rem; background: none; border: none; cursor: pointer; }
+        .mobile-menu-items { padding: 1.5rem; }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-menu-item i { color: var(--accent-lightblue); margin-right: 1rem; width: 1.75rem; }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-separator { margin: 1rem 0; border-top: 2px solid var(--accent-lightblue); }
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+
+        /* ----- PAGE HERO (CENTERED) ----- */
+        .page-hero {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            padding: 8rem 0 4rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+            text-align: center;
+        }
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .page-title { font-size: 3.5rem; }
+        }
+        .page-title span { color: var(--accent-lightblue); }
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-lightblue);
+        }
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ----- FILTER TABS ----- */
+        .filter-section {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            background: var(--bg-primary);
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+            backdrop-filter: blur(10px);
+            background-color: rgba(var(--bg-primary-rgb, 255,255,255), 0.95);
+        }
+        [data-theme="dark"] .filter-section {
+            background-color: rgba(10, 15, 26, 0.95);
+        }
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--accent-lightblue);
+            color: var(--text-main);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+
+        /* ----- FLEET GRID ----- */
+        .fleet-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        .fleet-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+            .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .fleet-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .drone-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .drone-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-lightblue);
+            box-shadow: 0 20px 30px -12px rgba(74,158,255,0.2);
+        }
+        .drone-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent-lightblue);
+        }
+        .drone-content {
+            padding: 1.5rem;
+        }
+        .drone-badge {
+            display: inline-block;
+            background: rgba(74,158,255,0.15);
+            color: var(--accent-lightblue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.8rem;
+            border-radius: 9999px;
+            margin-bottom: 0.75rem;
+        }
+        .drone-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .drone-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .spec-item i {
+            color: var(--accent-lightblue);
+            width: 1.25rem;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin: 1rem 0;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--border-subtle);
+        }
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-lightblue);
+        }
+        .price-period {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .book-btn {
+            width: 100%;
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.85rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        .book-btn:hover {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            transform: scale(0.98);
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: var(--accent-lightblue);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .cta-banner h2 {
+            color: var(--pure-white);
+            font-size: 2rem;
+        }
+        .cta-banner p {
+            color: var(--pure-white);
+            opacity: 0.9;
+            margin: 1rem 0;
+        }
+        .cta-btn {
+            background: var(--pure-black);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 2px solid transparent;
+        }
+        .cta-btn:hover {
+            background: transparent;
+            border-color: var(--pure-white);
+            color: var(--pure-white);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            padding: 4rem 0 2rem;
+            border-top: 2px solid var(--accent-lightblue);
+        }
+        .footer-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+        @media (min-width:768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+        .footer-heading {
+            color: var(--accent-lightblue);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-muted); transition: 0.2s; }
+        .footer-links a:hover { color: var(--accent-lightblue); padding-left: 4px; }
+        .footer-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--accent-lightblue);
+            background: var(--bg-primary);
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+        .footer-btn {
+            width: 100%;
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+        .copyright {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        #scroll-top {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; width: 3rem; height: 3rem;
+            background-color: var(--accent-lightblue); color: var(--pure-white); border-radius: 50%;
+            border: none; cursor: pointer; display: none; z-index: 100;
+            transition: 0.2s;
+        }
+        #scroll-top:hover { transform: scale(1.05); background: var(--pure-black); }
+        .fade-in-up { animation: fadeInUp 0.6s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Hide/show categories */
+        .drone-card {
+            display: block;
+        }
+        .drone-card.hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">light blue horizon</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown" id="home-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="fleet.html" class="nav-link active">Fleet</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="dropdown" id="dashboard-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="client.html" class="dropdown-item"><i class="fas fa-user mr-2"></i> Client Login</a>
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-user-shield mr-2"></i> Pilot Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <a href="join.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-plane"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">blue above</span></div></a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <a href="index.html" class="mobile-menu-item"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html" class="mobile-menu-item"><i class="fas fa-users"></i> About</a>
+        <a href="services.html" class="mobile-menu-item"><i class="fas fa-camera"></i> Services</a>
+        <a href="fleet.html" class="mobile-menu-item"><i class="fas fa-drone"></i> Fleet</a>
+        <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
+        <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- HERO SECTION - CENTERED -->
+<section class="page-hero">
+    <div class="container">
+        <div class="fade-in-up">
+            <h1 class="page-title">Our Elite <span>Drone Fleet</span></h1>
+            <p class="page-subtitle">Precision-engineered aircraft for cinematic masterpieces, industrial inspections, and agricultural excellence. All drones are FAA-certified, maintained daily, and pilot-ready.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="hero-stat-number">12+</div><div class="hero-stat-label">Aircraft Models</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">24/7</div><div class="hero-stat-label">Pilot Support</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">100%</div><div class="hero-stat-label">Pre-Flight Check</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FILTER TABS -->
+<section class="filter-section">
+    <div class="container">
+        <div class="filter-tabs" id="filter-tabs">
+            <button class="filter-btn active" data-category="all">All Drones</button>
+            <button class="filter-btn" data-category="cinema">Cinema & Photo</button>
+            <button class="filter-btn" data-category="inspection">Inspection & Mapping</button>
+            <button class="filter-btn" data-category="agriculture">Agriculture</button>
+        </div>
+    </div>
+</section>
+
+
+<section class="fleet-section">
+    <div class="container">
+        <div class="fleet-grid" id="fleet-grid">
+            
+            <!-- Drone 1: DJI Inspire 3 - Cinema -->
+            <div class="drone-card" data-category="cinema">
+                <img class="drone-img" src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?q=80&w=2070&auto=format" alt="DJI Inspire 3 Drone">
+                <div class="drone-content">
+                    <span class="drone-badge">Cinema 8K</span>
+                    <h3 class="drone-title">DJI Inspire 3</h3>
+                    <p class="drone-desc">Full-frame 8K sensor, cinematic color science, perfect for high-end filmmaking and commercials.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><i class="fas fa-clock"></i> <span>Flight Time: 28min</span></div>
+                        <div class="spec-item"><i class="fas fa-video"></i> <span>8K/60fps RAW</span></div>
+                        <div class="spec-item"><i class="fas fa-satellite"></i> <span>RTK Module</span></div>
+                        <div class="spec-item"><i class="fas fa-microchip"></i> <span>O4 Transmission</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div><span class="price">$499</span><span class="price-period"> / day</span></div>
+                        <span style="font-size:0.75rem; color:var(--accent-lightblue);"><i class="fas fa-check-circle"></i> Certified Pilot</span>
+                    </div>
+                    <button class="book-btn" onclick="alert('Booking request sent for DJI Inspire 3 – Our team will contact you within 24 hours.')"><i class="fas fa-calendar-check"></i> Book Now</button>
+                </div>
+            </div>
+
+            <!-- Drone 2: DJI Mavic 3E - Inspection -->
+            <div class="drone-card" data-category="inspection">
+                <img class="drone-img" src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2070&auto=format" alt="DJI Mavic 3E Enterprise Drone">
+                <div class="drone-content">
+                    <span class="drone-badge">Enterprise</span>
+                    <h3 class="drone-title">DJI Mavic 3E</h3>
+                    <p class="drone-desc">Thermal imaging, 56x hybrid zoom, RTK positioning for precise inspections and mapping.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><i class="fas fa-fire"></i> <span>Thermal Sensor</span></div>
+                        <div class="spec-item"><i class="fas fa-chart-line"></i> <span>56x Zoom</span></div>
+                        <div class="spec-item"><i class="fas fa-ruler-combined"></i> <span>RTK Accuracy</span></div>
+                        <div class="spec-item"><i class="fas fa-battery-full"></i> <span>45min Flight</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div><span class="price">$349</span><span class="price-period"> / day</span></div>
+                        <span style="font-size:0.75rem; color:var(--accent-lightblue);"><i class="fas fa-check-circle"></i> Certified Pilot</span>
+                    </div>
+                    <button class="book-btn" onclick="alert('Booking request sent for DJI Mavic 3E – Our team will contact you.')"><i class="fas fa-calendar-check"></i> Book Now</button>
+                </div>
+            </div>
+
+            <!-- Drone 3: Agras T40 - Agriculture -->
+            <div class="drone-card" data-category="agriculture">
+                <img class="drone-img" src="images/d1.avif" alt="Agras T40 Agricultural Drone">
+                <div class="drone-content">
+                    <span class="drone-badge">Agri Spray</span>
+                    <h3 class="drone-title">Agras T40</h3>
+                    <p class="drone-desc">Intelligent agricultural drone with 40L tank, dual atomized spraying, and terrain following.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><i class="fas fa-tractor"></i> <span>40L Capacity</span></div>
+                        <div class="spec-item"><i class="fas fa-wind"></i> <span>Smart Spray</span></div>
+                        <div class="spec-item"><i class="fas fa-charging-station"></i> <span>Radar Sensing</span></div>
+                        <div class="spec-item"><i class="fas fa-leaf"></i> <span>Coverage 25ha/hr</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div><span class="price">$699</span><span class="price-period"> / day</span></div>
+                        <span style="font-size:0.75rem; color:var(--accent-lightblue);"><i class="fas fa-check-circle"></i> Certified Pilot</span>
+                    </div>
+                    <button class="book-btn" onclick="alert('Booking request sent for Agras T40 – Our team will contact you.')"><i class="fas fa-calendar-check"></i> Book Now</button>
+                </div>
+            </div>
+
+            <!-- Drone 4: DJI Matrice 350 RTK - Inspection -->
+            <div class="drone-card" data-category="inspection">
+                <img class="drone-img" src="images/d2.webp" alt="DJI Matrice 350 RTK Industrial Drone">
+                <div class="drone-content">
+                    <span class="drone-badge">Industrial</span>
+                    <h3 class="drone-title">DJI Matrice 350 RTK</h3>
+                    <p class="drone-desc">Flagship industrial platform, IP55 rating, multiple payloads: laser, thermal, zoom camera.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><i class="fas fa-shield-alt"></i> <span>IP55 Rated</span></div>
+                        <div class="spec-item"><i class="fas fa-cubes"></i> <span>Multi-payload</span></div>
+                        <div class="spec-item"><i class="fas fa-bolt"></i> <span>55min Flight</span></div>
+                        <div class="spec-item"><i class="fas fa-cloud-sun"></i> <span>All-weather</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div><span class="price">$899</span><span class="price-period"> / day</span></div>
+                        <span style="font-size:0.75rem; color:var(--accent-lightblue);"><i class="fas fa-check-circle"></i> Certified Pilot</span>
+                    </div>
+                    <button class="book-btn" onclick="alert('Booking request sent for DJI Matrice 350 RTK – Our team will contact you.')"><i class="fas fa-calendar-check"></i> Book Now</button>
+                </div>
+            </div>
+
+            <!-- Drone 5: DJI Air 3 - Cinema -->
+            <div class="drone-card" data-category="cinema">
+                <img class="drone-img" src="images/d3.avif" alt="DJI Air 3 Dual Camera Drone">
+                <div class="drone-content">
+                    <span class="drone-badge">Dual Camera</span>
+                    <h3 class="drone-title">DJI Air 3</h3>
+                    <p class="drone-desc">Dual-primary cameras: wide-angle and 3x telephoto, 4K/60fps HDR, ideal for travel.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><i class="fas fa-camera"></i> <span>Dual 48MP</span></div>
+                        <div class="spec-item"><i class="fas fa-charging-station"></i> <span>46min Flight</span></div>
+                        <div class="spec-item"><i class="fas fa-arrow-right-arrow-left"></i> <span>O4 Video</span></div>
+                        <div class="spec-item"><i class="fas fa-gem"></i> <span>4K HDR</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div><span class="price">$249</span><span class="price-period"> / day</span></div>
+                        <span style="font-size:0.75rem; color:var(--accent-lightblue);"><i class="fas fa-check-circle"></i> Certified Pilot</span>
+                    </div>
+                    <button class="book-btn" onclick="alert('Booking request sent for DJI Air 3 – Our team will contact you.')"><i class="fas fa-calendar-check"></i> Book Now</button>
+                </div>
+            </div>
+
+            <!-- Drone 6: DJI Avata 2 - Cinema (FPV) -->
+            <div class="drone-card" data-category="cinema">
+                <img class="drone-img" src="images/d4.jpg" alt="DJI Avata 2 FPV Drone">
+                <div class="drone-content">
+                    <span class="drone-badge">FPV Drone</span>
+                    <h3 class="drone-title">DJI Avata 2</h3>
+                    <p class="drone-desc">Immersive FPV experience, 4K slow-motion, cinematic first-person view for action shots.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item"><i class="fas fa-vr-cardboard"></i> <span>FPV Goggles</span></div>
+                        <div class="spec-item"><i class="fas fa-forward-fast"></i> <span>96km/h</span></div>
+                        <div class="spec-item"><i class="fas fa-dice-d6"></i> <span>4K/60fps</span></div>
+                        <div class="spec-item"><i class="fas fa-rotate"></i> <span>Acro Mode</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div><span class="price">$199</span><span class="price-period"> / day</span></div>
+                        <span style="font-size:0.75rem; color:var(--accent-lightblue);"><i class="fas fa-check-circle"></i> Certified Pilot</span>
+                    </div>
+                    <button class="book-btn" onclick="alert('Booking request sent for DJI Avata 2 – Our team will contact you.')"><i class="fas fa-calendar-check"></i> Book Now</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+    <div class="container">
+        <h2>Ready to elevate your project?</h2>
+        <p>Book any drone with a certified pilot or rent raw — flexible crewed solutions available 24/7.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <a href="#" class="cta-btn" onclick="alert('Booking system ready! Contact our team.')"><i class="fas fa-calendar-alt"></i> Book a Flight</a>
+            <a href="#" class="cta-btn" style="background: transparent; border: 2px solid white;" onclick="alert('Contact our drone experts.')"><i class="fas fa-headset"></i> Contact Expert</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-logo-block">
+                <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-plane"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">light blue horizon</span></div></a>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">Professional drone solutions for every industry. Safety, innovation, and precision from the sky.</p>
+            </div>
+            <div><h3 class="footer-heading">Explore</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="fleet.html">Fleet</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+            <div><h3 class="footer-heading">Support</h3><ul class="footer-links"><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul></div>
+            <div><h3 class="footer-heading">Stay Updated</h3><input class="footer-input" placeholder="Your email"><button class="footer-btn">Subscribe</button><div style="margin-top: 1.5rem; display: flex; gap: 1rem;"><i class="fab fa-instagram" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i><i class="fab fa-youtube" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i><i class="fab fa-linkedin" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i></div></div>
+        </div>
+        <div class="copyright"><i class="fas fa-copyright"></i> 2025 AeroDrone — Black · White · Light Blue. Precision from above.</div>
+    </div>
+</footer>
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    (function() {
+        // ==================== THEME & RTL ====================
+        const htmlEl = document.documentElement;
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle');
+        const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+        const desktopIcon = document.getElementById('desktop-theme-icon');
+        const desktopRtl = document.getElementById('desktop-rtl-toggle');
+        const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+        let savedTheme = localStorage.getItem('theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        function updateIcons(theme) { if(desktopIcon) desktopIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; }
+        updateIcons(savedTheme);
+        function toggleTheme() { let newTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; htmlEl.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme); updateIcons(newTheme); }
+        if(desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+        if(mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+        function toggleRtl() { let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+        if(desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+        if(mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+        // Mobile menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-mobile-menu');
+        if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        if(closeBtn) closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        if(mobileMenu) mobileMenu.addEventListener('click', (e) => { if(e.target === mobileMenu) mobileMenu.classList.remove('active'); });
+
+        // Scroll top
+        const scrollBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => { if(scrollBtn) scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+        if(scrollBtn) scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ==================== FILTER FUNCTIONALITY (Pure HTML/CSS/JS - No data in JS) ====================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const droneCards = document.querySelectorAll('.drone-card');
+        
+        function filterDrones(category) {
+            droneCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hide');
+                } else {
+                    card.classList.add('hide');
+                }
+            });
+        }
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const category = btn.getAttribute('data-category');
+                filterDrones(category);
+            });
+        });
+        
+        // Initial filter to show all
+        filterDrones('all');
+
+        // Responsive close mobile menu
+        window.addEventListener('resize', () => { if (window.innerWidth >= 1280 && mobileMenu) mobileMenu.classList.remove('active'); });
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact AeroDrone - Professional drone pilot services. Get in touch for aerial photography, inspections, mapping, and pilot training inquiries.">
+    <title>AeroDrone | Contact - Get in Touch</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & VARIABLES (Same as index.html) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            /* Light mode */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+            --input-border: #e2e8f0;
+            --success-green: #10b981;
+            --error-red: #ef4444;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --btn-hover-bg: #FFFFFF;
+            --btn-hover-text: #0a0f1a;
+            --input-border: #2d3a52;
+            --success-green: #10b981;
+            --error-red: #f87171;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* ----- NAVBAR (exactly same as index.html) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            border-bottom: 2px solid var(--accent-lightblue);
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        .desktop-nav { display: none; align-items: center; gap: 0.25rem; }
+        .nav-link {
+            color: var(--text-muted);
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-link:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .nav-link.active {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            font-weight: 700;
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-lightblue);
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(74,158,255,0.3);
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 12px;
+        }
+        .dropdown-arrow { font-size: 0.7rem; transition: 0.2s; }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+        .navbar-right-desktop { display: none; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .mobile-menu-btn {
+            display: flex;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--accent-lightblue);
+        }
+        .mobile-menu-close { color: var(--text-main); font-size: 2rem; background: none; border: none; cursor: pointer; }
+        .mobile-menu-items { padding: 1.5rem; }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-menu-item i { color: var(--accent-lightblue); margin-right: 1rem; width: 1.75rem; }
+        .mobile-dropdown { border-bottom: 1px solid var(--border-subtle); }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+        }
+        .mobile-dropdown-content.active { max-height: 200px; padding: 0.75rem 0; }
+        .mobile-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: var(--text-muted);
+        }
+        .mobile-dropdown-content a:hover { background-color: var(--accent-lightblue); color: var(--pure-white); }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .mobile-action-item i { color: var(--accent-lightblue); margin-right: 1rem; }
+        .mobile-separator { margin: 1rem 0; border-top: 2px solid var(--accent-lightblue); }
+
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+
+        /* Contact Page Styles */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 8rem 0 4rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .contact-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .contact-title span {
+            color: var(--accent-lightblue);
+        }
+        .contact-sub {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Contact Info Cards */
+        .contact-info-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-lightblue);
+            box-shadow: 0 10px 30px rgba(74, 158, 255, 0.15);
+        }
+        .info-icon {
+            width: 4rem;
+            height: 4rem;
+            background: rgba(74, 158, 255, 0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .info-icon i {
+            font-size: 2rem;
+            color: var(--accent-lightblue);
+        }
+        .info-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .info-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .info-card a {
+            color: var(--accent-lightblue);
+            transition: color 0.2s;
+        }
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Form & Map */
+        .contact-form-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+        }
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media (min-width: 1024px) {
+            .form-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .form-wrapper {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid var(--border-subtle);
+        }
+        .form-wrapper h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .form-wrapper p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-subtle);
+            border-radius: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-lightblue);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .submit-btn {
+            width: 100%;
+            background: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: 2px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .map-wrapper {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            height: 100%;
+            min-height: 450px;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            border: none;
+        }
+        .form-success {
+            background: var(--success-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        .form-error {
+            background: var(--error-red);
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+        .faq-question i {
+            color: var(--accent-lightblue);
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            max-height: 200px;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            padding: 4rem 0 2rem 0;
+            border-top: 2px solid var(--accent-lightblue);
+        }
+        .footer-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+        @media (min-width:768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            }
+        }
+        .footer-logo-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .footer .logo {
+            margin-bottom: 0.5rem;
+        }
+        .footer-heading {
+            color: var(--accent-lightblue);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover {
+            color: var(--accent-lightblue);
+            padding-left: 4px;
+        }
+        .footer-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--accent-lightblue);
+            background: var(--bg-primary);
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+        .footer-btn {
+            width: 100%;
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-btn:hover {
+            background: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+        .copyright {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        #scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            border-radius: 50%;
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            display: none;
+            z-index: 100;
+        }
+        #scroll-top:hover {
+            background: transparent;
+            color: var(--text-main);
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR (exactly same as index.html) -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">light blue horizon</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown" id="home-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="fleet.html" class="nav-link">Fleet</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+            <div class="dropdown" id="dashboard-dropdown">
+                <span class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
+                <div class="dropdown-menu">
+                    <a href="client.html" class="dropdown-item"><i class="fas fa-user mr-2"></i> Client Login</a>
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-user-shield mr-2"></i> Pilot Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <a href="join.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div>
+                <div class="logo-text">Aero<span>Drone</span></div>
+                <span class="logo-tagline">blue above</span>
+            </div>
+        </a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('home-mobile')">
+                <span><i class="fas fa-home"></i> Home</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="home-mobile" class="mobile-dropdown-content">
+                <a href="index.html">Home 1</a> <a href="home2.html">Home 2</a>
+            </div>
+        </div>
+        <a href="about.html" class="mobile-menu-item"><i class="fas fa-users"></i> About</a>
+        <a href="services.html" class="mobile-menu-item"><i class="fas fa-camera"></i> Services</a>
+        <a href="fleet.html" class="mobile-menu-item"><i class="fas fa-drone"></i> Fleet</a>
+        <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
+        <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')">
+                <span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="dashboard-mobile" class="mobile-dropdown-content">
+                <a href="client.html">Client Login</a> <a href="admin.html">Pilot Login</a>
+            </div>
+        </div>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon" id="mobile-theme-icon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- Contact Hero Section -->
+<section class="contact-hero">
+    <div class="container">
+        <h1 class="contact-title">Get in <span>Touch</span></h1>
+        <p class="contact-sub">Have a project in mind? Need a professional drone pilot? We're here to help you take off.</p>
+    </div>
+</section>
+
+<!-- Contact Info Cards -->
+<section class="contact-info-section">
+    <div class="container">
+        <div class="info-grid">
+            <div class="info-card fade-in-up">
+                <div class="info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Visit Us</h3>
+                <p>123 Aviation Boulevard<br>Suite 450<br>Los Angeles, CA 90045</p>
+            </div>
+            <div class="info-card fade-in-up" style="animation-delay: 0.1s;">
+                <div class="info-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Call Us</h3>
+                <p><a href="tel:+18885551234">+1 (888) 555-1234</a><br><a href="tel:+18885555678">+1 (888) 555-5678</a><br>Mon-Fri: 8am - 8pm EST</p>
+            </div>
+            <div class="info-card fade-in-up" style="animation-delay: 0.2s;">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email Us</h3>
+                <p><a href="mailto:hello@aeroDrone.com">hello@aeroDrone.com</a><br><a href="mailto:support@aeroDrone.com">support@aeroDrone.com</a><br>24/7 response within 4 hours</p>
+            </div>
+            <div class="info-card fade-in-up" style="animation-delay: 0.3s;">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Office Hours</h3>
+                <p>Monday - Friday: 8:00 AM - 8:00 PM<br>Saturday: 9:00 AM - 5:00 PM<br>Sunday: Closed</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form & Map -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-wrapper fade-in-up">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                
+                <div id="form-success" class="form-success">
+                    <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We'll contact you soon.
+                </div>
+                <div id="form-error" class="form-error">
+                    <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again or call us directly.
+                </div>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interested In *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="aerial-photography">Aerial Photography & Video</option>
+                            <option value="industrial-inspection">Industrial Inspection</option>
+                            <option value="mapping-survey">Mapping & Surveying</option>
+                            <option value="pilot-training">Pilot Training</option>
+                            <option value="other">Other / General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your project, timeline, and any specific requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+            <div class="map-wrapper fade-in-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.846204661573!2d-118.40268398478477!3d33.94251278062714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b6e8f4b1b7b1%3A0x8e7b8e7b8e7b8e7b!2sLos%20Angeles%20International%20Airport!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Frequently Asked <span style="color: var(--accent-lightblue);">Questions</span></h2>
+            <p>Everything you need to know about our drone services</p>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How quickly can you respond to a service request?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We typically respond within 2-4 hours during business hours. For urgent inspections, we can often mobilize within 24-48 hours depending on location and weather conditions.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Are your pilots licensed and insured?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! All our pilots are FAA Part 107 certified and carry $2 million in liability insurance. We provide certificates of insurance upon request for any project.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What areas do you serve?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We primarily serve the greater Los Angeles area, but we have pilots available for projects nationwide. Contact us for remote locations—we can make arrangements!
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What happens if weather cancels my flight?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Safety is our priority. If weather conditions are unsafe for flight, we'll work with you to reschedule at no additional cost. We monitor forecasts closely and communicate proactively.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you offer custom drone training?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! We offer one-on-one and group training sessions tailored to your needs—from basic flight skills to advanced commercial operations and FAA test preparation.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER (exactly same as index.html) -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-logo-block">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div>
+                        <div class="logo-text">Aero<span>Drone</span></div>
+                        <span class="logo-tagline">light blue horizon</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; max-width: 220px;">Drones are transforming the way we capture the world, offering stunning aerial views and precise control from the sky.</p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="fleet.html">Fleet</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Stay Updated</h3>
+                <input class="footer-input" placeholder="Your email address">
+                <button class="footer-btn">Subscribe</button>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <i class="fab fa-instagram" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-youtube" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                    <i class="fab fa-linkedin" style="color: var(--accent-lightblue); font-size: 1.5rem; cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 2025 AeroDrone — Black · White · Light Blue. All visions from above.
+        </div>
+    </div>
+</footer>
+
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // Theme Toggle (same as index)
+    const htmlEl = document.documentElement;
+    const desktopThemeBtn = document.getElementById('desktop-theme-toggle');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    const desktopIcon = document.getElementById('desktop-theme-icon');
+    const mobileIcon = document.getElementById('mobile-theme-icon');
+    const desktopRtl = document.getElementById('desktop-rtl-toggle');
+    const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+    let savedTheme = localStorage.getItem('theme') || 'light';
+    htmlEl.setAttribute('data-theme', savedTheme);
+    
+    function updateIcons(theme) {
+        const iconClass = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        if (desktopIcon) desktopIcon.className = iconClass;
+        if (mobileIcon) mobileIcon.className = iconClass;
+    }
+    updateIcons(savedTheme);
+
+    function toggleTheme() {
+        let currentTheme = htmlEl.getAttribute('data-theme');
+        let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        htmlEl.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcons(newTheme);
+    }
+
+    if (desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+    if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+
+    function toggleRtl() {
+        let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+        htmlEl.setAttribute('dir', dir);
+        localStorage.setItem('direction', dir);
+    }
+    if (desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+    if (mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+    // Dropdown functions
+    window.toggleDesktopDropdown = function(id) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        document.getElementById(id)?.classList.toggle('active');
+    };
+    window.toggleMobileDropdown = function(id) {
+        document.getElementById(id)?.classList.toggle('active');
+    };
+
+    // Mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-mobile-menu');
+    if (menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    if (closeBtn) closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    if (mobileMenu) mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
+
+    // Scroll to top
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => { if(scrollBtn) scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none'; });
+    if (scrollBtn) scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1280 && mobileMenu) mobileMenu.classList.remove('active'); });
+    
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+    
+    // Form Submission Handler
+    const contactForm = document.getElementById('contact-form');
+    const successDiv = document.getElementById('form-success');
+    const errorDiv = document.getElementById('form-error');
+    
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Hide any previous messages
+        successDiv.style.display = 'none';
+        errorDiv.style.display = 'none';
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const formValues = Object.fromEntries(formData.entries());
+        
+        // Basic validation
+        if (!formValues.name || !formValues.email || !formValues.service || !formValues.message) {
+            errorDiv.style.display = 'block';
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all required fields.';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formValues.email)) {
+            errorDiv.style.display = 'block';
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid email address.';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+            return;
+        }
+        
+        // Simulate form submission (replace with actual API endpoint)
+        try {
+            // Show loading state
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call (replace with your actual endpoint)
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Success - in production, this would be after actual API response
+            successDiv.style.display = 'block';
+            contactForm.reset();
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+            
+        } catch (error) {
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        } finally {
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+            submitBtn.disabled = false;
+        }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✈️%3C/text%3E%3C/svg%3E" />
+    <title>AeroDrone | Admin Dashboard</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Root Color Engine (AeroDrone Theme: Black, White, Light Blue - Matching index.html) --- */
+        :root, html[data-theme='light'] {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #f0f7ff;
+            --text-main: #000000;
+            --text-muted: #1e2a3a;
+            --card-bg: #FFFFFF;
+            --border-subtle: #b8d1f0;
+            --accent-lightblue: #4a9eff;
+            --navbar-bg: #FFFFFF;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #d4e6ff;
+            --btn-hover-bg: #000000;
+            --btn-hover-text: #FFFFFF;
+            --color-background: #F8FAFF;
+            --color-primary-text: #000000;
+            --color-secondary-text: #1e2a3a;
+            --color-accent: #4a9eff;
+            --color-accent-dark: #2d7fdb;
+            --color-border: #e2edff;
+            --color-hover: #f0f7ff;
+            --color-card-bg: #FFFFFF;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-danger: #EF4444;
+        }
+        html[data-theme='dark'] {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --text-main: #FFFFFF;
+            --text-muted: #b0c7e9;
+            --card-bg: #1a2332;
+            --border-subtle: #2d3a52;
+            --accent-lightblue: #6eb0ff;
+            --navbar-bg: #0a0f1a;
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --light-blue: #1e2a3a;
+            --btn-hover-bg: #FFFFFF;
+            --btn-hover-text: #0a0f1a;
+            --color-background: #0a0f1a;
+            --color-primary-text: #FFFFFF;
+            --color-secondary-text: #b0c7e9;
+            --color-accent: #6eb0ff;
+            --color-accent-dark: #4a9eff;
+            --color-border: #2d3a52;
+            --color-hover: #111827;
+            --color-card-bg: #1a2332;
+            --color-success: #059669;
+            --color-warning: #D97706;
+            --color-danger: #DC2626;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Helpers */
+        .text-accent { color: var(--color-accent); }
+        .bg-background { background-color: var(--bg-primary); }
+        .text-primary-text { color: var(--text-main); }
+        .text-secondary-text { color: var(--text-muted); }
+        .bg-hover { background-color: var(--color-hover); }
+        .border-border { border-color: var(--color-border); }
+        .card-bg { background-color: var(--color-card-bg); }
+        .bg-sidebar { background-color: var(--bg-primary); }
+        .bg-success { background-color: var(--color-success); }
+        .bg-warning { background-color: var(--color-warning); }
+        .bg-danger { background-color: var(--color-danger); }
+        .text-success { color: var(--color-success); }
+        .text-warning { color: var(--color-warning); }
+        .text-danger { color: var(--color-danger); }
+
+        /* Dashboard Cards - matching index.html card style */
+        .dashboard-card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 2rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.08);
+        }
+        .dashboard-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(74, 158, 255, 0.12);
+        }
+
+        /* Status Pulse - Light Blue matching index */
+        .status-pulse {
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-accent);
+            border-radius: 9999px;
+            box-shadow: 0 0 0 0 rgba(74, 158, 255, 0.5);
+            animation: pulse2 2s infinite;
+        }
+        @keyframes pulse2 { 70% { box-shadow: 0 0 0 6px rgba(74, 158, 255, 0); } }
+
+        /* Sidebar Links - matching index hover style */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 30px;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: var(--color-accent);
+            color: var(--pure-white);
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+        }
+        .sidebar-link:hover i, .sidebar-link.active i {
+            color: white;
+        }
+        .sidebar-link.logout:hover {
+            background-color: var(--color-danger);
+            color: white;
+        }
+
+        /* RTL Handling */
+        html[dir="rtl"] .sidebar-link { flex-direction: row-reverse; }
+        html[dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+        html[dir="rtl"] .navbar-flex { flex-direction: row-reverse; }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .admin-section { display: block; }
+        .bg-accent-gradient {
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { 
+            height: 4px;
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { 
+            background: var(--color-accent); 
+            border-radius: 10px; 
+        }
+
+        /* Mobile Overlay */
+        #mobile-overlay {
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            position: fixed;
+            inset: 0;
+            z-index: 55;
+        }
+        #mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Chart Bars */
+        .chart-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+            transition: width 0.3s ease;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .status-badge.active { background-color: var(--color-success); color: white; }
+        .status-badge.pending { background-color: var(--color-warning); color: white; }
+        .status-badge.cancelled { background-color: var(--color-danger); color: white; }
+        .status-badge.completed { background-color: var(--color-accent); color: white; }
+        
+        /* Logo Style - EXACTLY matching index.html */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: opacity 0.2s;
+        }
+        .logo:hover { opacity: 0.8; }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--bg-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-lightblue);
+        }
+        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--accent-lightblue); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+        }
+        
+        /* Icon button style matching index */
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--accent-lightblue);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon-btn:hover {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+        }
+        
+        /* Login button style matching index */
+        .login-btn {
+            background-color: var(--accent-lightblue);
+            color: var(--pure-white);
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            border: 1px solid var(--accent-lightblue);
+        }
+        .login-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+    </style>
+</head>
+<body class="antialiased bg-background h-screen overflow-hidden w-full">
+    <!-- TOP BAR - EXACT MATCH with index.html styling -->
+    <header class="border-b border-border bg-background sticky top-0 z-50 w-full" style="border-bottom: 2px solid var(--accent-lightblue);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-3">
+            <!-- Hamburger + Brand - Logo exactly like index.html -->
+            <div class="flex items-center gap-3">
+                <button id="mobile-menu-toggle" class="lg:hidden p-2 -ml-2 rounded-xl hover:bg-hover transition text-primary-text" title="Open Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div>
+                        <div class="logo-text">Aero<span>Drone</span></div>
+                        <span class="logo-tagline">light blue horizon</span>
+                    </div>
+                </a>
+            </div>
+            <!-- Admin Utilities with index.html button styles -->
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0 rtl:flex-row-reverse">
+                <!-- Search -->
+               
+
+                <!-- RTL Toggle - exactly like index.html icon-btn -->
+                <button id="lang-toggle" class="icon-btn" title="Toggle RTL/LTR">
+                    <i class="fas fa-right-left"></i>
+                </button>
+
+                <!-- Theme Toggle - exactly like index.html icon-btn -->
+                <button id="theme-toggle-user" class="icon-btn">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- Notifications -->
+               
+
+                <!-- Admin Profile - styled like login-btn from index -->
+               
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay" class="lg:hidden"></div>
+
+    <!-- MAIN LAYOUT -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-10 py-6 h-[calc(100vh-80px)] w-full relative">      
+        <div class="flex flex-col lg:flex-row gap-6 xl:gap-10 h-full">
+            <!-- SIDEBAR -->
+            <aside id="sidebar-container" class="fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 xl:w-80 z-[60] lg:z-10 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-sidebar lg:bg-transparent lg:flex-shrink-0">
+                <div class="dashboard-card p-5 bg-sidebar h-full overflow-y-auto custom-scrollbar border-r lg:border border-border lg:rounded-2xl rounded-none shadow-none lg:shadow-md">                    
+                    <!-- Mobile Sidebar Header -->
+                    <div class="flex lg:hidden justify-between items-center mb-6 px-2">
+                        <div class="flex items-center gap-2 text-accent">
+                            <i class="fas fa-drone"></i>
+                            <span class="text-xs font-black uppercase tracking-widest">Admin Menu</span>
+                        </div>
+                        <button id="close-sidebar" class="p-2 hover:bg-hover rounded-lg text-primary-text">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 pb-5 mb-4 border-b border-border">
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xl flex-shrink-0 border border-accent/30">
+                             <i class="fas fa-user-astronaut text-sm user-avatar-icon" style="color: var(--accent-lightblue);"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="font-bold text-primary-text truncate">Alex Rivera</p>
+                            <p class="text-[11px] sm:text-xs text-secondary-text flex items-center gap-1 mt-1 font-bold">
+                                <span class="inline-block w-2 h-2 bg-emerald-400 rounded-full"></span> AeroDrone Online
+                            </p>
+                        </div>
+                    </div>
+
+                    <nav class="flex flex-col gap-1">
+                        <p class="text-[10px] uppercase tracking-widest text-secondary-text font-black mt-2 mb-2 px-2">Main</p>
+                        <a href="#" onclick="activateSection('overview')" data-section="overview" class="sidebar-link active">
+                            <i class="fas fa-chart-pie w-5"></i>
+                            <span>Dashboard / Stats</span>
+                        </a>
+                        <a href="#" onclick="activateSection('flights')" data-section="flights" class="sidebar-link">
+                            <i class="fas fa-plane w-5"></i>
+                            <span>Flight Operations</span>
+                        </a>
+                        <a href="#" onclick="activateSection('drones')" data-section="drones" class="sidebar-link">
+                           <i class="fas fa-users w-5"></i>
+                            <span>Fleet Management</span>
+                        </a>
+                        
+                        <p class="text-[10px] uppercase tracking-widest text-secondary-text font-black mt-4 mb-2 px-2">Services</p>
+                        <a href="#" onclick="activateSection('bookings')" data-section="bookings" class="sidebar-link">
+                            <i class="fas fa-calendar-check w-5"></i>
+                            <span>Bookings</span>
+                            <span class="ml-auto bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">8</span>
+                        </a>
+                        <a href="#" onclick="activateSection('clients')" data-section="clients" class="sidebar-link">
+                            <i class="fas fa-users w-5"></i>
+                            <span>Clients</span>
+                        </a>
+
+                        <p class="text-[10px] uppercase tracking-widest text-secondary-text font-black mt-4 mb-2 px-2">System</p>
+                        <a href="#" onclick="activateSection('reports')" data-section="reports" class="sidebar-link">
+                            <i class="fas fa-chart-line w-5"></i>
+                            <span>Analytics</span>
+                        </a>
+                        <a href="#" onclick="activateSection('settings')" data-section="settings" class="sidebar-link">
+                            <i class="fas fa-sliders-h w-5"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" onclick="activateSection('logout')" data-section="logout" class="sidebar-link logout mt-2">
+                            <i class="fas fa-power-off w-5"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </nav>
+
+                    <div class="mt-8 pt-4 border-t border-border text-[11px] text-secondary-text">
+                        <div class="flex justify-between"><span>System Status</span><span class="font-bold text-accent">Operational</span></div>
+                        <div class="flex justify-between mt-1.5"><span>Active Drones</span><span class="font-medium text-accent">6/8</span></div>
+                        <div class="flex justify-between mt-1.5"><span>API Health</span><span class="font-medium text-success">100%</span></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CONTENT AREA -->
+            <div class="flex-1 min-w-0 overflow-y-auto custom-scrollbar pr-2">                
+                <!-- OVERVIEW SECTION -->
+                <div id="overview" class="admin-section">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h2 class="text-2xl sm:text-3xl font-black mb-2">Welcome back, Captain</h2>
+                                <p class="text-white/80 text-sm">AeroDrone flight operations dashboard — monitor all aerial missions.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">Live Feed</span>
+                                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                                    <i class="fas fa-circle text-success text-[6px]"></i> System Online
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="dashboard-card p-6 reveal">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-secondary-text text-xs uppercase tracking-wider font-bold">Total Flights</p>
+                                    <p class="text-3xl font-black mt-2">2,845</p>
+                                    <p class="text-success text-xs font-bold mt-2 flex items-center gap-1"><i class="fas fa-arrow-up"></i> +18.2%</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-plane text-accent text-xl"></i></div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card p-6 reveal">
+                            <div class="flex justify-between items-start">
+                                <div><p class="text-secondary-text text-xs uppercase tracking-wider font-bold">Active Missions</p><p class="text-3xl font-black mt-2">24</p><p class="text-warning text-xs font-bold mt-2 flex items-center gap-1"><i class="fas fa-clock"></i> 5 in progress</p></div>
+                                <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-drone text-accent text-xl"></i></div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card p-6 reveal">
+                            <div class="flex justify-between items-start">
+                                <div><p class="text-secondary-text text-xs uppercase tracking-wider font-bold">Fleet Size</p><p class="text-3xl font-black mt-2">8</p><p class="text-success text-xs font-bold mt-2 flex items-center gap-1"><i class="fas fa-plus"></i> 2 new</p></div>
+                                <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-helicopter text-accent text-xl"></i></div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card p-6 reveal">
+                            <div class="flex justify-between items-start">
+                                <div><p class="text-secondary-text text-xs uppercase tracking-wider font-bold">Client Rating</p><p class="text-3xl font-black mt-2">4.96</p><p class="text-success text-xs font-bold mt-2 flex items-center gap-1"><i class="fas fa-star"></i> 520 reviews</p></div>
+                                <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-star text-accent text-xl"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts & Recent Activity -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="dashboard-card p-6 lg:col-span-2 reveal">
+                            <div class="flex justify-between items-center mb-6"><h3 class="font-black text-lg">Flight Revenue Overview</h3><select class="bg-hover border border-border rounded-full px-4 py-2 text-xs font-bold uppercase"><option>Last 7 Days</option><option>Last 30 Days</option></select></div>
+                            <div class="h-64 flex items-end justify-between gap-2">
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 40px;"></div><span class="text-xs text-secondary-text">Mon</span></div>
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 65px;"></div><span class="text-xs text-secondary-text">Tue</span></div>
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 45px;"></div><span class="text-xs text-secondary-text">Wed</span></div>
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 80px;"></div><span class="text-xs text-secondary-text">Thu</span></div>
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 95px;"></div><span class="text-xs text-secondary-text">Fri</span></div>
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 70px;"></div><span class="text-xs text-secondary-text">Sat</span></div>
+                                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 55px;"></div><span class="text-xs text-secondary-text">Sun</span></div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-border flex justify-between"><span class="text-secondary-text text-sm">Total Revenue</span><span class="font-black text-xl text-accent">$124,582</span></div>
+                        </div>
+                        <div class="dashboard-card p-6 reveal">
+                            <h3 class="font-black text-lg mb-4">Recent Activity</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center"><i class="fas fa-check text-success text-xs"></i></div><div><p class="text-sm font-bold">Flight #AV-3842 Completed</p><p class="text-xs text-secondary-text">5 min ago</p></div></div>
+                                <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-calendar-plus text-accent text-xs"></i></div><div><p class="text-sm font-bold">New booking confirmed</p><p class="text-xs text-secondary-text">12 min ago</p></div></div>
+                                <div class="flex items-start gap-3"><div class="w-8 h-8 rounded-full bg-warning/10 flex items-center justify-center"><i class="fas fa-drone text-warning text-xs"></i></div><div><p class="text-sm font-bold">Drone Mavic 3E deployed</p><p class="text-xs text-secondary-text">24 min ago</p></div></div>
+                            </div>
+                            <button class="w-full mt-6 py-3 text-xs font-black uppercase tracking-wider text-accent border border-accent/20 rounded-xl hover:bg-accent/5 transition">View All Activity</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FLIGHT OPERATIONS SECTION -->
+                <div id="flights" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                            <h2 class="text-xl sm:text-2xl font-bold text-primary-text flex items-center gap-2"><span class="text-accent">✈️</span> Flight Operations</h2>
+                            <button class="px-6 py-3 bg-accent-gradient text-white rounded-full text-xs font-black uppercase tracking-widest shadow-lg"><i class="fas fa-plus mr-1"></i> Schedule Flight</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left min-w-[800px]">
+                                <thead class="border-b border-border text-secondary-text text-[10px] uppercase font-black tracking-widest"><tr><th class="pb-3 px-2">Flight ID</th><th class="pb-3 px-2">Client</th><th class="pb-3 px-2">Drone</th><th class="pb-3 px-2">Date</th><th class="pb-3 px-2">Status</th><th class="pb-3 px-2 text-right">Actions</th></tr></thead>
+                                <tbody class="divide-y divide-border/40">
+                                    <tr><td class="py-4 px-2 font-black">#AV-3842</td><td class="py-4 px-2">Elena Voss</td><td class="py-4 px-2">Inspire 3</td><td class="py-4 px-2">May 28, 2PM</td><td class="py-4 px-2"><span class="status-badge completed">Completed</span></td><td class="py-4 px-2 text-right"><button class="text-accent hover:scale-110 transition"><i class="fas fa-eye"></i></button></td></tr>
+                                    <tr><td class="py-4 px-2 font-black">#AV-3901</td><td class="py-4 px-2">James Chen</td><td class="py-4 px-2">Mavic 3E</td><td class="py-4 px-2">May 29, 10AM</td><td class="py-4 px-2"><span class="status-badge pending">Scheduled</span></td><td class="py-4 px-2 text-right"><button class="text-accent hover:scale-110 transition"><i class="fas fa-edit"></i></button></td></tr>
+                                    <tr><td class="py-4 px-2 font-black">#AV-3956</td><td class="py-4 px-2">Marcus Wong</td><td class="py-4 px-2">Agras T40</td><td class="py-4 px-2">May 30, 9AM</td><td class="py-4 px-2"><span class="status-badge active">Active</span></td><td class="py-4 px-2 text-right"><button class="text-accent hover:scale-110 transition"><i class="fas fa-play"></i></button></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FLEET MANAGEMENT SECTION -->
+                <div id="drones" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-bold text-primary-text mb-6 flex items-center gap-2"><span class="text-accent">🚁</span> Fleet Management</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="dashboard-card p-5 text-center"><div class="w-full h-32 bg-accent/10 rounded-2xl flex items-center justify-center mb-3"><i class="fas fa-drone text-accent text-5xl"></i></div><h3 class="font-black text-lg">DJI Inspire 3</h3><p class="text-secondary-text text-sm">Status: <span class="text-success font-bold">Active</span></p><p class="text-accent font-bold mt-2">Flight Hours: 124h</p></div>
+                            <div class="dashboard-card p-5 text-center"><div class="w-full h-32 bg-accent/10 rounded-2xl flex items-center justify-center mb-3"><i class="fas fa-drone text-accent text-5xl"></i></div><h3 class="font-black text-lg">DJI Mavic 3E</h3><p class="text-secondary-text text-sm">Status: <span class="text-success font-bold">Active</span></p><p class="text-accent font-bold mt-2">Flight Hours: 89h</p></div>
+                            <div class="dashboard-card p-5 text-center"><div class="w-full h-32 bg-accent/10 rounded-2xl flex items-center justify-center mb-3"><i class="fas fa-helicopter text-accent text-5xl"></i></div><h3 class="font-black text-lg">Agras T40</h3><p class="text-secondary-text text-sm">Status: <span class="text-warning font-bold">Maintenance</span></p><p class="text-accent font-bold mt-2">Flight Hours: 210h</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOOKINGS SECTION -->
+                <div id="bookings" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-bold text-primary-text mb-6 flex items-center gap-2"><span class="text-accent">📅</span> Recent Bookings</h2>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-4 bg-hover rounded-2xl"><div><p class="font-black">Aerial Photography - Downtown</p><p class="text-xs text-secondary-text">Client: Maya Simone · May 30, 2026</p></div><span class="status-badge pending">Pending</span></div>
+                            <div class="flex justify-between items-center p-4 bg-hover rounded-2xl"><div><p class="font-black">Industrial Inspection - Solar Farm</p><p class="text-xs text-secondary-text">Client: Soren Vane · Jun 2, 2026</p></div><span class="status-badge completed">Confirmed</span></div>
+                            <div class="flex justify-between items-center p-4 bg-hover rounded-2xl"><div><p class="font-black">Surveying & Mapping - Riverside</p><p class="text-xs text-secondary-text">Client: Elena Voss · Jun 5, 2026</p></div><span class="status-badge active">Active</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CLIENTS SECTION -->
+                <div id="clients" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-bold text-primary-text mb-6 flex items-center gap-2"><span class="text-accent">👥</span> Client Directory</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 p-4 bg-hover rounded-2xl"><div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center"><i class="fas fa-user text-accent text-xl"></i></div><div><p class="font-black">Maya Simone</p><p class="text-xs text-secondary-text">12 flights · Premium</p></div></div>
+                            <div class="flex items-center gap-3 p-4 bg-hover rounded-2xl"><div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center"><i class="fas fa-user text-accent text-xl"></i></div><div><p class="font-black">Soren Vane</p><p class="text-xs text-secondary-text">8 flights · Enterprise</p></div></div>
+                            <div class="flex items-center gap-3 p-4 bg-hover rounded-2xl"><div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center"><i class="fas fa-user-tie text-accent text-xl"></i></div><div><p class="font-black">Elena Voss</p><p class="text-xs text-secondary-text">24 flights · VIP</p></div></div>
+                            <div class="flex items-center gap-3 p-4 bg-hover rounded-2xl"><div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center"><i class="fas fa-user text-accent text-xl"></i></div><div><p class="font-black">Marcus Wong</p><p class="text-xs text-secondary-text">5 flights · Business</p></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REPORTS SECTION -->
+                <div id="reports" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-bold text-primary-text mb-6 flex items-center gap-2"><span class="text-accent">📊</span> Flight Analytics</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="dashboard-card p-5"><h3 class="font-black mb-3">Monthly Performance</h3><div class="space-y-3"><div><div class="flex justify-between"><span>May 2026</span><span class="text-accent font-bold">342 flights</span></div><div class="w-full h-2 bg-border rounded-full mt-1"><div class="h-full bg-accent rounded-full w-[78%]"></div></div></div><div><div class="flex justify-between"><span>April 2026</span><span class="text-accent font-bold">289 flights</span></div><div class="w-full h-2 bg-border rounded-full mt-1"><div class="h-full bg-accent rounded-full w-[65%]"></div></div></div></div></div>
+                            <div class="dashboard-card p-5"><h3 class="font-black mb-3">Top Services</h3><div class="space-y-3"><p><i class="fas fa-camera text-accent mr-2"></i> Aerial Photography - 48%</p><p><i class="fas fa-hard-hat text-accent mr-2"></i> Industrial Inspection - 32%</p><p><i class="fas fa-map-marked-alt text-accent mr-2"></i> Surveying & Mapping - 20%</p></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS SECTION -->
+                <div id="settings" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-bold text-primary-text mb-6 flex items-center gap-2"><span class="text-accent">⚙️</span> System Settings</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div><p class="font-bold">Maintenance Mode</p><p class="text-xs text-secondary-text">Temporarily disable flight bookings</p></div><div class="w-12 h-6 bg-border rounded-full p-1 cursor-pointer"><span class="block w-4 h-4 bg-accent rounded-full"></span></div></div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div><p class="font-bold">Email Alerts</p><p class="text-xs text-secondary-text">Receive flight status notifications</p></div><div class="w-12 h-6 bg-accent rounded-full p-1 cursor-pointer"><span class="block w-4 h-4 bg-white rounded-full ml-auto"></span></div></div>
+                            <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div><p class="font-bold">Auto Backup</p><p class="text-xs text-secondary-text">Daily backup of flight logs</p></div><div class="w-12 h-6 bg-accent rounded-full p-1 cursor-pointer"><span class="block w-4 h-4 bg-white rounded-full ml-auto"></span></div></div>
+                        </div>
+                        <div class="mt-6 pt-4"><button class="bg-accent-gradient text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">Save Changes</button></div>
+                    </div>
+                </div>
+
+                <!-- LOGOUT SECTION -->
+                <div id="logout" class="admin-section hidden">
+                    <div class="dashboard-card p-10 reveal active text-center max-w-lg mx-auto">
+                        <div class="w-20 h-20 mx-auto bg-accent/10 rounded-full flex items-center justify-center text-accent text-3xl mb-6"><i class="fas fa-sign-out-alt"></i></div>
+                        <h2 class="text-2xl font-bold text-primary-text">End Admin Session?</h2>
+                        <p class="text-secondary-text mt-3">You will be redirected to the home page.</p>
+                        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="index.html"><button class="bg-accent-gradient text-white font-black uppercase tracking-widest px-8 py-3 rounded-full text-[10px] transition shadow-lg">Sign Out</button></a>
+                            <button onclick="activateSection('overview')" class="bg-hover border border-border px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="mt-12 text-center text-[10px] text-secondary-text border-t border-border pt-8 pb-12">
+                    <p class="uppercase tracking-[0.3em] font-black opacity-60">© 2025 AeroDrone · Precision Aerial Intelligence</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            const htmlEl = document.documentElement;
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const closeSidebar = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('sidebar-container');
+            const overlay = document.getElementById('mobile-overlay');
+
+            function toggleMobileMenu(isOpen) {
+                if (isOpen) { sidebar.classList.remove('-translate-x-full'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; } 
+                else { sidebar.classList.add('-translate-x-full'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+            }
+            if (menuToggle) menuToggle.addEventListener('click', () => toggleMobileMenu(true));
+            if (closeSidebar) closeSidebar.addEventListener('click', () => toggleMobileMenu(false));
+            if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
+
+            // Theme Toggle - exactly like index.html
+            const themeBtn = document.getElementById('theme-toggle-user');
+            const themeIcon = document.getElementById('theme-icon');
+            function setTheme(theme) { 
+                htmlEl.setAttribute('data-theme', theme); 
+                localStorage.setItem('theme', theme);
+                if (themeIcon) themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            if (themeBtn) themeBtn.addEventListener('click', () => { const current = htmlEl.getAttribute('data-theme'); setTheme(current === 'light' ? 'dark' : 'light'); });
+
+            // RTL Toggle - exactly like index.html
+            const langBtn = document.getElementById('lang-toggle');
+            function setDirection(dir) { htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+            const savedDir = localStorage.getItem('direction') || 'ltr';
+            setDirection(savedDir);
+            if (langBtn) langBtn.addEventListener('click', () => { const currentDir = htmlEl.getAttribute('dir') || 'ltr'; setDirection(currentDir === 'ltr' ? 'rtl' : 'ltr'); });
+
+            function checkReveal() { document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active'); }); }
+            window.addEventListener('scroll', checkReveal); window.addEventListener('load', checkReveal);
+
+            const sections = ['overview', 'flights', 'drones', 'bookings', 'clients', 'reports', 'settings', 'logout'];
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            window.activateSection = function(sectionId) {
+                sections.forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+                const activeEl = document.getElementById(sectionId); if (activeEl) activeEl.classList.remove('hidden');
+                sidebarLinks.forEach(link => { link.classList.remove('active'); if (link.dataset.section === sectionId) link.classList.add('active'); });
+                if (window.innerWidth < 1024) toggleMobileMenu(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            sidebarLinks.forEach(link => { link.addEventListener('click', function(e) { e.preventDefault(); const section = this.dataset.section; if (section) activateSection(section); }); });
+            activateSection('overview');
+        })();
+    </script>
+</body>
+</html>
