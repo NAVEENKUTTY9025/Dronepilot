@@ -82,6 +82,49 @@
             align-items: center;
             justify-content: space-between;
         }
+        /* Default (desktop unchanged) */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.stats-showcase {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* ✅ 360px Mobile Fix ONLY */
+@media (max-width: 360px) {
+
+    .achievements-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+
+    .stats-showcase {
+        grid-template-columns: 1fr !important;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+
+    .certs-showcase {
+        width: 100%;
+    }
+
+    .cert-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .cert-icon {
+        margin-bottom: 0.5rem;
+    }
+}
         .logo {
             display: flex;
             align-items: center;
