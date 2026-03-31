@@ -573,7 +573,7 @@
 <nav class="navbar-container">
     <div class="container navbar-flex">
         <a href="index.html" class="logo">
-            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div class="logo-icon"><i class="fas fa-satellite"></i></div>
             <div>
                 <div class="logo-text">Aero<span>Drone</span></div>
                 <span class="logo-tagline">Light Blue Horizon</span>
@@ -597,14 +597,14 @@
                 <span class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
                 <div class="dropdown-menu">
                     <a href="client.html" class="dropdown-item"><i class="fas fa-user mr-2"></i> Client Login</a>
-                    <a href="admin.html" class="dropdown-item"><i class="fas fa-user-shield mr-2"></i> Pilot Login</a>
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-user-shield mr-2"></i> Login</a>
                 </div>
             </div>
         </div>
         <div class="navbar-right-desktop">
             <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
-            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
-            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-language"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Login</a>
             <a href="join.html" class="login-btn">Register</a>
         </div>
         <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
@@ -615,7 +615,7 @@
 <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-header">
         <a href="index.html" class="logo">
-            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div class="logo-icon"><i class="fas fa-satellite"></i></div>
             <div>
                 <div class="logo-text">Aero<span>Drone</span></div>
                 <span class="logo-tagline">Light Blue Horizon</span>
@@ -643,13 +643,13 @@
                 <span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i>
             </button>
             <div id="dashboard-mobile" class="mobile-dropdown-content">
-                <a href="client.html">Client Login</a> <a href="admin.html">Pilot Login</a>
+                <a href="client.html">Client Login</a> <a href="admin.html">Login</a>
             </div>
         </div>
         <div class="mobile-separator"></div>
         <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
         <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
-        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-language"></i> RTL</button>
         <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon" id="mobile-theme-icon"></i> Theme</button>
     </div>
 </div>
@@ -752,29 +752,75 @@
 
 <!-- TEAM -->
 <section style="background:var(--bg-secondary); padding:4rem 0;">
+    
     <div class="container">
-        <h2 style="font-size:3rem; text-align:center;">Meet the pilots</h2>
-         <div class="team-grid">
-            <div class="team-card"><div class="team-img" style="background-image:url('/images/g1.jpg');"></div><h3>James Chen</h3><p style="color:var(--accent-lightblue);">Lead Pilot</p></div>
-            <div class="team-card"><div class="team-img" style="background-image:url('/images/g2.jpg');"></div><h3>Saran M.</h3><p style="color:var(--accent-lightblue);">Inspector</p></div>
-            <div class="team-card"><div class="team-img" style="background-image:url('/images/g3.jpg');"></div><h3>Marcus W.</h3><p style="color:var(--accent-lightblue);">Cinematic</p></div>
-            <div class="team-card"><div class="team-img" style="background-image:url('/images/g4.jpg');"></div><h3>Elen P.</h3><p style="color:var(--accent-lightblue);">Mapping</p></div>
+        
+        <h2 style="font-size:3rem; text-align:center; margin-bottom:2.5rem;">
+            Meet the pilots
+        </h2>
+        
+        <div class="team-grid" style="margin-top:1rem;">
+            
+            <div class="team-card">
+                <div class="team-img" style="background-image:url('/images/g1.jpg');"></div>
+                <h3>James Chen</h3>
+                <p style="color:var(--accent-lightblue);">Lead Pilot</p>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-img" style="background-image:url('/images/g2.jpg');"></div>
+                <h3>Saran M.</h3>
+                <p style="color:var(--accent-lightblue);">Inspector</p>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-img" style="background-image:url('/images/g3.jpg');"></div>
+                <h3>Marcus W.</h3>
+                <p style="color:var(--accent-lightblue);">Cinematic</p>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-img" style="background-image:url('/images/g4.jpg');"></div>
+                <h3>Elen P.</h3>
+                <p style="color:var(--accent-lightblue);">Mapping</p>
+            </div>
+            
         </div>
+        
     </div>
+    
 </section>
 
 <!-- CTA BANNER -->
 <section style="background: var(--accent-lightblue); padding:4rem 0;">
-    <div class="container text-center">
-        <h2 style="font-size:3rem; color:var(--pure-white);">Ready to take off?</h2>
-        <p style="color:var(--pure-white);">10% off first flight</p>
-        <div style="display:flex; gap:1rem; justify-content:center; margin-top:2rem;">
-            <a href="gallery.html" class="btn-primary" style="background:var(--pure-black); color:var(--pure-white); border-color:var(--pure-black);">Book Now</a>
-            <a href="contact.html" class="btn-outline" style="border-color:var(--pure-white); color:var(--pure-white);">Contact</a>
+    
+    <div style="max-width:800px; margin:0 auto; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        
+        <h2 style="font-size:3rem; color:var(--pure-white); margin-bottom:0.5rem; text-align:center;">
+            Ready to take off?
+        </h2>
+        
+        <p style="color:var(--pure-white); margin:0;">
+            10% off first flight
+        </p>
+        
+        <div style="display:flex; gap:1rem; justify-content:center; align-items:center; margin-top:2rem; flex-wrap:wrap;">
+            
+            <a href="gallery.html" class="btn-primary" 
+               style="background:var(--pure-black); color:var(--pure-white); border-color:var(--pure-black);">
+               Book Now
+            </a>
+            
+            <a href="contact.html" class="btn-outline" 
+               style="border-color:var(--pure-white); color:var(--pure-white);">
+               Contact
+            </a>
+            
         </div>
+        
     </div>
+    
 </section>
-
 <!-- FOOTER (matching logo exactly like navbar) -->
 <footer class="footer">
     <div class="container">
@@ -782,7 +828,7 @@
             <!-- Left column with exact same logo + tagline -->
             <div class="footer-logo-block">
                 <a href="index.html" class="logo">
-                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div class="logo-icon"><i class="fas fa-satellite"></i></div>
                     <div>
                         <div class="logo-text">Aero<span>Drone</span></div>
                         <span class="logo-tagline">Light Blue Horizon</span>

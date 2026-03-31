@@ -708,7 +708,7 @@
 <nav class="navbar-container">
     <div class="container navbar-flex">
         <a href="index.html" class="logo">
-            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div class="logo-icon"><i class="fas fa-satellite"></i></div>
             <div>
                 <div class="logo-text">Aero<span>Drone</span></div>
                 <span class="logo-tagline">Light Blue Horizon</span>
@@ -732,14 +732,14 @@
                 <span class="nav-link">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
                 <div class="dropdown-menu">
                     <a href="client.html" class="dropdown-item">Client Login</a>
-                    <a href="admin.html" class="dropdown-item">Pilot Login</a>
+                    <a href="admin.html" class="dropdown-item">Login</a>
                 </div>
             </div>
         </div>
         <div class="navbar-right-desktop">
             <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
-            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
-            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-language"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Login</a>
             <a href="join.html" class="login-btn">Register</a>
         </div>
         <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
@@ -749,7 +749,7 @@
 <!-- Mobile Menu -->
 <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-header">
-        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-plane"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">Light Blue Horizon</span></div></a>
+        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-satellite"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">Light Blue Horizon</span></div></a>
         <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
     </div>
     <div class="mobile-menu-items">
@@ -760,11 +760,11 @@
         <a href="pricing.html" class="nav-link active"><i class="fas fa-tag"></i> Pricing</a>
         <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
         <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
-        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')"><span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i></button><div id="dashboard-mobile" class="mobile-dropdown-content"><a href="client.html">Client Login</a><a href="admin.html">Pilot Login</a></div></div>
+        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')"><span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i></button><div id="dashboard-mobile" class="mobile-dropdown-content"><a href="client.html">Client Login</a><a href="admin.html">Login</a></div></div>
         <div class="mobile-separator"></div>
         <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
         <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
-        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-language"></i> RTL</button>
         <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon"></i> Theme</button>
     </div>
 </div>
@@ -791,13 +791,19 @@
             <span class="billing-option" id="yearly-option">Yearly <span class="save-badge">Save 20%</span></span>
         </div>
 
-        <div class="pricing-grid" id="pricing-grid">
+        <div class="pricing-grid" id="pricing-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; align-items:stretch;">
+
             <!-- Basic Plan -->
-            <div class="pricing-card">
-                <div class="plan-icon"><i class="fas fa-images"></i></i></div>
+            <div class="pricing-card" style="display:flex; flex-direction:column; height:100%;">
+                <div class="plan-icon"><i class="fas fa-images"></i></div>
                 <h3 class="plan-name">Basic</h3>
-                <div class="plan-price"><span class="price-monthly">$299</span><span class="price-yearly" style="display:none;">$239</span><span>/mo</span></div>
+                <div class="plan-price">
+                    <span class="price-monthly">$299</span>
+                    <span class="price-yearly" style="display:none;">$239</span>
+                    <span>/mo</span>
+                </div>
                 <p class="plan-description">Perfect for small projects and occasional needs</p>
+
                 <ul class="plan-features">
                     <li><i class="fas fa-check"></i> 2 Flight Hours per month</li>
                     <li><i class="fas fa-check"></i> 4K Video & Photos</li>
@@ -806,16 +812,22 @@
                     <li><i class="fas fa-check"></i> Email Support</li>
                     <li class="disabled"><i class="fas fa-times"></i> Thermal Imaging</li>
                 </ul>
-                <button class="pricing-btn">Choose Plan</button>
+
+                <button class="pricing-btn" style="margin-top:auto;">Choose Plan</button>
             </div>
 
-            <!-- Professional Plan (Popular) -->
-            <div class="pricing-card popular">
+            <!-- Professional Plan -->
+            <div class="pricing-card popular" style="display:flex; flex-direction:column; height:100%;">
                 <div class="popular-badge">Most Popular</div>
                 <div class="plan-icon"><i class="fas fa-rocket"></i></div>
                 <h3 class="plan-name">Professional</h3>
-                <div class="plan-price"><span class="price-monthly">$699</span><span class="price-yearly" style="display:none;">$559</span><span>/mo</span></div>
+                <div class="plan-price">
+                    <span class="price-monthly">$699</span>
+                    <span class="price-yearly" style="display:none;">$559</span>
+                    <span>/mo</span>
+                </div>
                 <p class="plan-description">Ideal for businesses and regular projects</p>
+
                 <ul class="plan-features">
                     <li><i class="fas fa-check"></i> 10 Flight Hours per month</li>
                     <li><i class="fas fa-check"></i> 8K HDR + Thermal Imaging</li>
@@ -824,15 +836,21 @@
                     <li><i class="fas fa-check"></i> Priority Support + Phone</li>
                     <li><i class="fas fa-check"></i> FAA Certified Pilot</li>
                 </ul>
-                <button class="pricing-btn primary">Choose Plan</button>
+
+                <button class="pricing-btn primary" style="margin-top:auto;">Choose Plan</button>
             </div>
 
             <!-- Enterprise Plan -->
-            <div class="pricing-card">
+            <div class="pricing-card" style="display:flex; flex-direction:column; height:100%;">
                 <div class="plan-icon"><i class="fas fa-chart-line"></i></div>
                 <h3 class="plan-name">Enterprise</h3>
-                <div class="plan-price"><span class="price-monthly">$1,499</span><span class="price-yearly" style="display:none;">$1,199</span><span>/mo</span></div>
+                <div class="plan-price">
+                    <span class="price-monthly">$1,499</span>
+                    <span class="price-yearly" style="display:none;">$1,199</span>
+                    <span>/mo</span>
+                </div>
                 <p class="plan-description">For large-scale operations and enterprises</p>
+
                 <ul class="plan-features">
                     <li><i class="fas fa-check"></i> Unlimited Flight Hours</li>
                     <li><i class="fas fa-check"></i> LiDAR + Multispectral</li>
@@ -841,15 +859,21 @@
                     <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
                     <li><i class="fas fa-check"></i> API Integration Available</li>
                 </ul>
-                <button class="pricing-btn">Contact Sales</button>
+
+                <button class="pricing-btn" style="margin-top:auto;">Contact Sales</button>
             </div>
 
             <!-- Training Plan -->
-            <div class="pricing-card">
+            <div class="pricing-card" style="display:flex; flex-direction:column; height:100%;">
                 <div class="plan-icon"><i class="fas fa-graduation-cap"></i></div>
                 <h3 class="plan-name">Pilot Training</h3>
-                <div class="plan-price"><span class="price-monthly">$899</span><span class="price-yearly" style="display:none;">$719</span><span>/course</span></div>
+                <div class="plan-price">
+                    <span class="price-monthly">$899</span>
+                    <span class="price-yearly" style="display:none;">$719</span>
+                    <span>/course</span>
+                </div>
                 <p class="plan-description">Become a certified commercial drone pilot</p>
+
                 <ul class="plan-features">
                     <li><i class="fas fa-check"></i> FAA Part 107 Prep Course</li>
                     <li><i class="fas fa-check"></i> 20 Hours Flight Training</li>
@@ -858,8 +882,10 @@
                     <li><i class="fas fa-check"></i> Lifetime Support</li>
                     <li><i class="fas fa-check"></i> Job Placement Assistance</li>
                 </ul>
-                <button class="pricing-btn">Enroll Now</button>
+
+                <button class="pricing-btn" style="margin-top:auto;">Enroll Now</button>
             </div>
+
         </div>
     </div>
 </section>
@@ -981,7 +1007,7 @@
             <!-- Left column with exact same logo + tagline -->
             <div class="footer-logo-block">
                 <a href="index.html" class="logo">
-                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div class="logo-icon"><i class="fas fa-satellite"></i></div>
                     <div>
                         <div class="logo-text">Aero<span>Drone</span></div>
                         <span class="logo-tagline">Light Blue Horizon</span>

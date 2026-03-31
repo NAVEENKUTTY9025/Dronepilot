@@ -25,9 +25,8 @@
         };
     </script>
     <style>
-        /* ----- EXACT SAME VARIABLES AS INDEX.HTML ----- */
+        /* ----- VARIABLES ----- */
         :root {
-            /* Light mode */
             --bg-primary: #FFFFFF;
             --bg-secondary: #f0f7ff;
             --text-main: #000000;
@@ -77,129 +76,57 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            padding: 1rem; 
+            padding: 1.5rem; 
             transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
         }
         
-        /* ----- EXACT SAME LOGO STYLES AS INDEX.HTML (FIXED VISIBILITY) ----- */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: opacity 0.2s;
-            text-decoration: none;
-        }
-        .logo:hover { opacity: 0.8; }
-        .logo-icon {
-            width: 3rem;
-            height: 3rem;
-            background-color: var(--bg-primary);
-            border-radius: 1rem;
+        /* CENTERED CONTAINER - PERFECT CENTERING */
+        .centered-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--accent-lightblue);
-        }
-        .logo-icon i { color: var(--accent-lightblue); font-size: 2rem; }
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-        .logo-text span { color: var(--accent-lightblue); }
-        .logo-tagline {
-            font-size: 0.625rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: -0.25rem;
-            font-weight: 500;
+            width: 100%;
+            min-height: 100vh;
         }
         
-        /* Mobile logo size adjustment - EXACT SAME STYLE */
-        .logo-mobile {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-        }
-        .logo-icon-mobile {
-            width: 2.5rem;
-            height: 2.5rem;
-            background-color: var(--bg-primary);
-            border-radius: 0.875rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--accent-lightblue);
-        }
-        .logo-icon-mobile i { color: var(--accent-lightblue); font-size: 1.5rem; }
-        .logo-text-mobile {
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-        .logo-text-mobile span { color: var(--accent-lightblue); }
-        .logo-tagline-mobile {
-            font-size: 0.5rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: -0.2rem;
-            font-weight: 500;
-        }
-        
-        /* Left side logo for dark background - white text for visibility */
-        .logo-sidebar {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: opacity 0.2s;
-            text-decoration: none;
-        }
-        .logo-sidebar:hover { opacity: 0.8; }
-        .logo-icon-sidebar {
-            width: 3rem;
-            height: 3rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--accent-lightblue);
-        }
-        .logo-icon-sidebar i { color: var(--accent-lightblue); font-size: 2rem; }
-        .logo-text-sidebar {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: hsl(0, 0%, 0%);
-            letter-spacing: -0.02em;
-        }
-        .logo-text-sidebar span { color: var(--accent-lightblue); }
-        .logo-tagline-sidebar {
-            font-size: 0.625rem;
-            color: rgba(255, 255, 255, 0.7);
-            display: block;
-            margin-top: -0.25rem;
-            font-weight: 500;
-        }
-        
-        /* Auth Card Styles */
+        /* TIGHTENED AUTH CARD - REMOVED EXCESS PADDING, CLEAN & NEAT */
         .auth-card { 
             background-color: var(--card-bg); 
             border: 1px solid var(--accent-lightblue); 
-            box-shadow: 0 25px 50px -12px rgba(74, 158, 255, 0.2); 
+            box-shadow: 0 20px 40px -12px rgba(74, 158, 255, 0.15); 
             width: 100%; 
-            max-width: 1000px; 
-            border-radius: 1.5rem; 
+            max-width: 920px; 
+            border-radius: 1.25rem; 
             overflow: hidden; 
+            transition: all 0.3s ease;
+        }
+        
+        /* TIGHTENED CONTENT PADDING */
+        .right-content {
+            padding: 1.75rem 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .right-content {
+                padding: 1.5rem;
+            }
+            body {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .right-content {
+                padding: 1.25rem;
+            }
         }
         
         .control-bubble { 
             background-color: var(--card-bg); 
             border: 1px solid var(--accent-lightblue); 
-            width: 40px; 
-            height: 40px; 
+            width: 38px; 
+            height: 38px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -217,32 +144,63 @@
             background-color: transparent; 
             border: 1px solid var(--border-subtle); 
             color: var(--text-main); 
-            padding: 0.75rem 1rem; 
+            padding: 0.7rem 1rem; 
             width: 100%; 
-            border-radius: 0.5rem;
+            border-radius: 0.6rem;
             transition: all 0.2s;
-            font-size: 0.875rem;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
         .input-field:focus { 
             border-color: var(--accent-lightblue); 
             outline: none;
-            box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
         }
         .input-field::placeholder {
             color: var(--text-muted);
-            opacity: 0.6;
+            opacity: 0.45;
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+        
+        /* UNIFIED COMPACT LABEL STYLES - SAME SIZE, TIGHTENED */
+        .form-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .form-label i {
+            margin-right: 0.3rem;
+            font-size: 0.6rem;
+            opacity: 0.8;
+        }
+        
+        /* TIGHTENED FORM GROUP SPACING */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group:last-of-type {
+            margin-bottom: 0.5rem;
         }
         
         .btn-primary { 
             background: var(--accent-lightblue); 
             color: var(--pure-white); 
-            padding: 0.85rem; 
+            padding: 0.75rem; 
             width: 100%; 
             border-radius: 9999px; 
             font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 0.1em; 
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             border: 1px solid var(--accent-lightblue);
             transition: all 0.2s;
             cursor: pointer;
@@ -258,10 +216,10 @@
             align-items: center; 
             justify-content: center; 
             gap: 0.5rem; 
-            padding: 0.6rem; 
+            padding: 0.55rem; 
             border: 1px solid var(--border-subtle); 
             border-radius: 9999px; 
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             font-weight: 700; 
             transition: 0.2s;
             background: transparent;
@@ -277,15 +235,134 @@
             color: var(--pure-white);
         }
         
+        /* TIGHTENED HEADER SECTION */
+        .auth-header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .auth-header h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+        
+        .auth-header p {
+            font-size: 0.6rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-top: 0.25rem;
+        }
+        
+        /* PASSWORD TOGGLE */
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            opacity: 0.55;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toggle-password:hover {
+            opacity: 1;
+            color: var(--accent-lightblue);
+        }
+        
+        /* MATCH MESSAGE */
+        .match-message {
+            font-size: 0.6rem;
+            font-weight: 800;
+            margin-top: 0.35rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+        
+        /* LEFT SIDE STYLES - TIGHTENED */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        .logo-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+        }
+        .logo-icon-sidebar {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid var(--accent-lightblue);
+        }
+        .logo-icon-sidebar i { color: var(--accent-lightblue); font-size: 1.5rem; }
+        .logo-text-sidebar {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .logo-text-sidebar span { color: var(--accent-lightblue); }
+        .logo-tagline-sidebar {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: block;
+            margin-top: -0.2rem;
+            font-weight: 500;
+        }
+        
+        /* Mobile logo */
+        .logo-icon-mobile {
+            width: 2.2rem;
+            height: 2.2rem;
+            background-color: var(--bg-primary);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid var(--accent-lightblue);
+        }
+        .logo-icon-mobile i { color: var(--accent-lightblue); font-size: 1.25rem; }
+        .logo-text-mobile {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+        .logo-text-mobile span { color: var(--accent-lightblue); }
+        .logo-tagline-mobile {
+            font-size: 0.45rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: -0.2rem;
+            font-weight: 500;
+        }
+        
         /* RTL Support */
         html[dir="rtl"] .md\:flex-row { 
             flex-direction: row-reverse; 
         }
-        html[dir="rtl"] .text-left { 
-            text-align: right; 
-        }
         
-        /* Animations */
+        /* Toast animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -300,147 +377,169 @@
             animation: fadeInUp 0.3s ease-out;
         }
         
-        /* Left side gradient overlay */
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+        /* Tighten checkbox */
+        .terms-checkbox {
+            width: 0.9rem;
+            height: 0.9rem;
+            accent-color: var(--accent-lightblue);
+        }
+        
+        /* Divider tightened */
+        .divider {
+            margin: 1.25rem 0;
+        }
+        
+        /* Social buttons grid gap tightened */
+        .social-grid {
+            gap: 0.6rem;
+        }
+        
+        /* Login link tightened */
+        .login-link {
+            margin-top: 1.5rem;
+            font-size: 0.6rem;
         }
     </style>
 </head>
 <body>
-
-    <!-- Floating Control Buttons (RTL & Theme) -->
+    <!-- Floating Control Buttons -->
     <div class="fixed top-4 right-4 z-50 flex gap-2">
-        <button onclick="toggleRTL()" class="control-bubble"><i class="fas fa-right-left"></i></button>
+        <button onclick="toggleRTL()" class="control-bubble"><i class="fas fa-language"></i></button>
         <button onclick="toggleTheme()" class="control-bubble"><i class="fas fa-moon" id="themeIcon"></i></button>
     </div>
 
-    <div class="auth-card flex flex-col md:flex-row">
-        <!-- Left Side - Hero Section with Drone Image -->
-        <div class="hidden md:flex md:w-5/12 relative min-h-[500px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop" 
-                 class="absolute inset-0 w-full h-full object-cover"
-                 alt="Drone aerial view">
-            <div class="absolute inset-0 hero-gradient"></div>
-            <div class="relative z-10 p-8 flex flex-col justify-between h-full w-full">
-                <!-- SIDEBAR LOGO - White text for dark background -->
-                <a href="index.html" class="logo-sidebar">
-                    <div class="logo-icon-sidebar"><i class="fas fa-plane"></i></div>
+    <div class="centered-container">
+        <div class="auth-card flex flex-col md:flex-row">
+            <!-- Left Side - Hero Section -->
+            <div class="hidden md:flex md:w-5/12 relative min-h-[480px] overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop" 
+                     class="absolute inset-0 w-full h-full object-cover"
+                     alt="Drone aerial view">
+                <div class="absolute inset-0 hero-gradient"></div>
+                <div class="relative z-10 p-6 flex flex-col justify-between h-full w-full">
+                    <a href="index.html" class="logo-sidebar">
+                        <div class="logo-icon-sidebar"><i class="fas fa-satellite"></i></div>
+                        <div>
+                            <div class="logo-text-sidebar">Aero<span>Drone</span></div>
+                            <span class="logo-tagline-sidebar">Light Blue Horizon</span>
+                        </div>
+                    </a>
                     <div>
-                        <div class="logo-text-sidebar">Aero<span>Drone</span></div>
-                        <span class="logo-tagline-sidebar">Light Blue Horizon</span>
+                        <h2 class="text-3xl font-black text-white leading-tight mb-3">Join The<br><span style="color: var(--accent-lightblue);">Elite Fleet</span></h2>
+                        <p class="text-xs text-white/80 mb-3">Certified pilot or premium aerial intelligence.</p>
+                        <div class="flex gap-3">
+                            <div class="flex items-center gap-1.5">
+                                <i class="fas fa-drone text-xs" style="color: var(--accent-lightblue);"></i>
+                                <span class="text-[10px] text-white/70">FAA Certified</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <i class="fas fa-chart-line text-xs" style="color: var(--accent-lightblue);"></i>
+                                <span class="text-[10px] text-white/70">2500+ Flights</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - TIGHTENED SIGNUP FORM -->
+            <div class="w-full md:w-7/12 right-content flex flex-col justify-center">
+                <!-- Mobile Logo -->
+                <a href="index.html" class="md:hidden flex items-center gap-2 mb-5 justify-center">
+                    <div class="logo-icon-mobile"><i class="fas fa-satellite"></i></div>
+                    <div class="text-left">
+                        <div class="logo-text-mobile">Aero<span>Drone</span></div>
+                        <span class="logo-tagline-mobile">Light Blue Horizon</span>
                     </div>
                 </a>
-                <div>
-                    <h2 class="text-4xl font-black text-white leading-tight mb-4">Join The<br><span style="color: var(--accent-lightblue);" class="font-serif">Elite Fleet</span></h2>
-                    <p class="text-sm text-white/80 mb-4">Become a certified pilot or access premium aerial intelligence services.</p>
-                    <div class="flex gap-4">
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-drone" style="color: var(--accent-lightblue);"></i>
-                            <span class="text-xs text-white/70">FAA Certified</span>
+
+                <div class="auth-header">
+                    <h3 style="color: var(--text-main);">Create Your Identity</h3>
+                    <p style="color: var(--text-muted);">Enter The AeroDrone Experience</p>
+                </div>
+
+                <form onsubmit="handleAuth(event)">
+                    <!-- FIRST NAME -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-user-circle"></i> FIRST NAME</label>
+                        <input type="text" id="firstName" required class="input-field" placeholder="Alex" autocomplete="given-name">
+                    </div>
+                    
+                    <!-- LAST NAME -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-user-tag"></i> LAST NAME</label>
+                        <input type="text" id="lastName" required class="input-field" placeholder="Johnson" autocomplete="family-name">
+                    </div>
+                    
+                    <!-- EMAIL -->
+                    
+                    
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-lock"></i> PASSWORD</label>
+                        <input type="password" id="pass" required class="input-field" placeholder="••••••••" autocomplete="new-password">
+                    </div>
+                    
+                    <!-- CONFIRM PASSWORD -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-shield-alt"></i> CONFIRM PASSWORD</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirmPass" required class="input-field pr-10" placeholder="••••••••" autocomplete="off" oninput="checkPassMatch()">
+                            <button type="button" class="toggle-password" onclick="togglePass(this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-chart-line" style="color: var(--accent-lightblue);"></i>
-                            <span class="text-xs text-white/70">2500+ Flights</span>
-                        </div>
+                        <div id="matchMsg" class="match-message"></div>
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="form-group flex items-center justify-between pt-0">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" id="termsCheckbox" class="terms-checkbox">
+                            <span class="text-[0.6rem] uppercase font-black tracking-wider opacity-70 group-hover:opacity-100 transition-opacity" style="color: var(--text-muted);">
+                                I agree to Terms & Conditions
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary shadow-md mt-1">
+                        <i class="fas fa-user-plus mr-2"></i> Create Account
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="divider relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t" style="border-color: var(--border-subtle);"></div>
+                    </div>
+                    <div class="relative flex justify-center text-[0.6rem] uppercase font-black tracking-widest">
+                        <span class="px-3" style="background-color: var(--card-bg); color: var(--text-muted);">Social Sign Up</span>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Right Side - Signup Form (Friend's Structure) -->
-        <div class="w-full md:w-7/12 p-6 lg:p-8 flex flex-col justify-center">
-            <!-- Mobile Logo - EXACT SAME STYLE AS INDEX.HTML (visible in both modes) -->
-            <a href="index.html" class="md:hidden flex items-center gap-3 mb-6 justify-center group">
-                <div class="logo-icon-mobile"><i class="fas fa-plane"></i></div>
-                <div class="text-left">
-                    <div class="logo-text-mobile">Aero<span>Drone</span></div>
-                    <span class="logo-tagline-mobile">Light Blue Horizon</span>
+                <!-- Social Buttons -->
+                <div class="grid grid-cols-3 social-grid">
+                    <button type="button" class="social-btn" onclick="socialSignup('google')">
+                        <i class="fab fa-google text-red-500 text-xs"></i><span class="text-[0.6rem]">Google</span>
+                    </button>
+                    <button type="button" class="social-btn" onclick="socialSignup('facebook')">
+                        <i class="fab fa-facebook text-blue-600 text-xs"></i><span class="text-[0.6rem]">Facebook</span>
+                    </button>
+                    <button type="button" class="social-btn" onclick="socialSignup('apple')">
+                        <i class="fab fa-apple text-xs"></i><span class="text-[0.6rem]">Apple</span>
+                    </button>
                 </div>
-            </a>
-
-            <div class="mb-6 text-center">
-                <h3 class="text-2xl font-black" style="color: var(--text-main);">Create Your Identity</h3>
-                <p class="text-[10px] opacity-50 uppercase tracking-widest mt-1" style="color: var(--text-muted);">
-                    Enter The AeroDrone Experience
+                
+                <!-- Login Link -->
+                <p class="login-link text-center opacity-60 uppercase tracking-widest" style="color: var(--text-muted);">
+                    Already Registered? <a href="login.html" class="font-black hover:underline" style="color: var(--accent-lightblue);">Login</a>
                 </p>
             </div>
-
-            <form onsubmit="handleAuth(event)" class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[9px] font-black uppercase tracking-widest opacity-50 mb-1" style="color: var(--text-muted);">First Name</label>
-                        <input type="text" id="firstName" required class="input-field text-sm" placeholder="Alex">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-black uppercase tracking-widest opacity-50 mb-1" style="color: var(--text-muted);">Last Name</label>
-                        <input type="text" id="lastName" required class="input-field text-sm" placeholder="Johnson">
-                    </div>
-                </div>
-                
-                <div>
-                    <label class="block text-[9px] font-black uppercase tracking-widest opacity-50 mb-1" style="color: var(--text-muted);">Email</label>
-                    <input type="email" id="email" required class="input-field text-sm" placeholder="pilot@aeroDrone.com">
-                </div>
-                
-                <div>
-                    <label class="block text-[9px] font-black uppercase tracking-widest opacity-50 mb-1" style="color: var(--text-muted);">Password</label>
-                    <input type="password" id="pass" required class="input-field text-sm" placeholder="••••••••">
-                </div>
-                
-                <div>
-                    <label class="block text-[9px] font-black uppercase tracking-widest opacity-50 mb-1" style="color: var(--text-muted);">Confirm Password</label>
-                    <div class="relative">
-                        <input type="password" id="confirmPass" required class="input-field text-sm pr-10" placeholder="••••••••" oninput="checkPassMatch()">
-                        <button type="button" onclick="togglePass(this)" class="absolute right-3 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-100 transition-all" style="color: var(--text-muted);">
-                            <i class="fas fa-eye text-xs"></i>
-                        </button>
-                    </div>
-                    <p id="matchMsg" class="text-[9px] mt-1 font-black tracking-widest uppercase"></p>
-                </div>
-
-                <div class="flex items-center justify-between px-1">
-                    <label class="flex items-center gap-2 cursor-pointer group">
-                        <input type="checkbox" id="termsCheckbox" class="w-3 h-3 rounded border-gray-300 accent-[#4a9eff]">
-                        <span class="text-[10px] uppercase font-black tracking-tighter opacity-70 group-hover:opacity-100 transition-opacity" style="color: var(--text-muted);">
-                            I Agree to Terms & Conditions
-                        </span>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn-primary shadow-lg mt-2">
-                    <i class="fas fa-user-plus mr-2"></i> Create Account
-                </button>
-            </form>
-
-            <div class="relative my-4">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t" style="border-color: var(--border-subtle);"></div>
-                </div>
-                <div class="relative flex justify-center text-[8px] uppercase font-black tracking-widest">
-                    <span class="px-4" style="background-color: var(--card-bg); color: var(--text-muted);">Social Sign Up</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-3 gap-3">
-                <button type="button" class="social-btn" onclick="socialSignup('google')">
-                    <i class="fab fa-google text-red-500"></i><span>Google</span>
-                </button>
-                <button type="button" class="social-btn" onclick="socialSignup('facebook')">
-                    <i class="fab fa-facebook text-blue-600"></i><span>Facebook</span>
-                </button>
-                <button type="button" class="social-btn" onclick="socialSignup('apple')">
-                    <i class="fab fa-apple"></i><span>Apple</span>
-                </button>
-            </div>
-            
-            <p class="mt-8 text-[10px] opacity-60 uppercase tracking-widest text-center" style="color: var(--text-muted);">
-                Already Registered? <a href="login.html" class="font-black hover:underline" style="color: var(--accent-lightblue);">Login</a>
-            </p>
         </div>
     </div>
 
     <script>
-        // ==================== THEME TOGGLE (EXACT SAME AS INDEX.HTML) ====================
+        // ==================== THEME TOGGLE ====================
         const htmlElement = document.documentElement;
         
         function toggleTheme() {
@@ -449,14 +548,12 @@
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            // Update icon
             const themeIcon = document.getElementById('themeIcon');
             if (themeIcon) {
                 themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
         }
         
-        // Load saved theme
         let savedTheme = localStorage.getItem('theme') || 'light';
         htmlElement.setAttribute('data-theme', savedTheme);
         const themeIconElement = document.getElementById('themeIcon');
@@ -464,7 +561,7 @@
             themeIconElement.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
         
-        // ==================== RTL TOGGLE (EXACT SAME AS INDEX.HTML) ====================
+        // ==================== RTL TOGGLE ====================
         function toggleRTL() {
             let currentDir = htmlElement.getAttribute('dir');
             let newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
@@ -472,13 +569,12 @@
             localStorage.setItem('direction', newDir);
         }
         
-        // Load saved direction
         let savedDir = localStorage.getItem('direction');
         if (savedDir) {
             htmlElement.setAttribute('dir', savedDir);
         }
         
-        // ==================== PASSWORD MATCH CHECK (FRIEND'S CODE STRUCTURE) ====================
+        // ==================== PASSWORD MATCH ====================
         function checkPassMatch() {
             const pass = document.getElementById("pass").value;
             const confirm = document.getElementById("confirmPass").value;
@@ -489,29 +585,52 @@
                 return;
             }
             
-            if (pass === confirm) {
-                msg.innerHTML = "✓ Passcodes Match";
+            if (pass === confirm && pass.length > 0) {
+                msg.innerHTML = "✓ PASSCODES MATCH";
                 msg.style.color = "#10b981";
             } else {
-                msg.innerHTML = "✗ Passcodes Do Not Match";
+                msg.innerHTML = "✗ PASSCODES DO NOT MATCH";
                 msg.style.color = "#ef4444";
             }
         }
         
-        // ==================== TOGGLE PASSWORD VISIBILITY (FRIEND'S CODE STRUCTURE) ====================
+        // ==================== TOGGLE PASSWORD ====================
         function togglePass(button) {
-            const input = button.parentElement.querySelector('input');
+            const wrapper = button.parentElement;
+            const input = wrapper.querySelector('input');
             const icon = button.querySelector('i');
             if (input.type === 'password') {
                 input.type = 'text';
-                icon.className = 'fas fa-eye-slash text-xs';
+                icon.className = 'fas fa-eye-slash';
             } else {
                 input.type = 'password';
-                icon.className = 'fas fa-eye text-xs';
+                icon.className = 'fas fa-eye';
             }
         }
         
-        // ==================== FORM SUBMISSION HANDLER ====================
+        // ==================== TOAST ====================
+        function showToast(message, type = 'success') {
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) existingToast.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 px-5 py-2.5 rounded-full font-semibold text-xs shadow-lg transition-all duration-300';
+            toast.style.backgroundColor = type === 'success' ? '#10b981' : '#ef4444';
+            toast.style.color = 'white';
+            toast.style.zIndex = '10000';
+            toast.style.whiteSpace = 'nowrap';
+            toast.style.fontFamily = "'Inter', sans-serif";
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>${message}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(20px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+        
+        // ==================== FORM SUBMIT ====================
         async function handleAuth(event) {
             event.preventDefault();
             
@@ -522,7 +641,6 @@
             const confirmPass = document.getElementById('confirmPass').value;
             const termsCheckbox = document.getElementById('termsCheckbox');
             
-            // Validation
             if (!firstName || !lastName || !email || !password) {
                 showToast('Please fill in all fields', 'error');
                 return;
@@ -549,13 +667,11 @@
                 return;
             }
             
-            // Simulate registration
             const submitBtn = event.target.querySelector('button[type="submit"]');
             const originalHTML = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-2"></i> Creating...';
             submitBtn.disabled = true;
             
-            // Store user data in localStorage
             const users = JSON.parse(localStorage.getItem('aeroDrone_users') || '[]');
             const userExists = users.some(u => u.email === email);
             
@@ -566,7 +682,6 @@
                 return;
             }
             
-            // Save new user
             users.push({
                 firstName,
                 lastName,
@@ -585,34 +700,11 @@
             }, 800);
         }
         
-        // ==================== SOCIAL SIGNUP ====================
         function socialSignup(provider) {
             showToast(`Sign up with ${provider} coming soon!`, 'success');
         }
         
-        // ==================== TOAST NOTIFICATION ====================
-        function showToast(message, type = 'success') {
-            const existingToast = document.querySelector('.toast-notification');
-            if (existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = 'toast-notification fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-full font-medium text-sm shadow-lg transition-all duration-300';
-            toast.style.backgroundColor = type === 'success' ? '#10b981' : '#ef4444';
-            toast.style.color = 'white';
-            toast.style.zIndex = '10000';
-            toast.style.whiteSpace = 'nowrap';
-            toast.style.fontFamily = "'Inter', sans-serif";
-            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>${message}`;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(-50%) translateY(20px)';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-        
-        // Add focus styles for better UX
+        // Input focus styles
         const inputs = document.querySelectorAll('.input-field');
         inputs.forEach(input => {
             input.addEventListener('focus', function() {
@@ -623,14 +715,13 @@
             });
         });
         
-        // Fix for auto-fill background
+        // Auto-fill fix
         const styleFix = document.createElement('style');
         styleFix.textContent = `
             input:-webkit-autofill,
             input:-webkit-autofill:focus {
                 -webkit-text-fill-color: var(--text-main);
                 -webkit-box-shadow: 0 0 0px 1000px var(--card-bg) inset;
-                transition: background-color 5000s ease-in-out 0s;
             }
         `;
         document.head.appendChild(styleFix);

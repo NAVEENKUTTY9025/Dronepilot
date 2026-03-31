@@ -605,7 +605,7 @@
 <nav class="navbar-container">
     <div class="container navbar-flex">
         <a href="index.html" class="logo">
-            <div class="logo-icon"><i class="fas fa-plane"></i></div>
+            <div class="logo-icon"><i class="fas fa-satellite"></i></div>
             <div>
                 <div class="logo-text">Aero<span>Drone</span></div>
                 <span class="logo-tagline">Light Blue Horizon</span>
@@ -629,14 +629,14 @@
                 <span class="nav-link">Pilot Portal <i class="fas fa-chevron-down dropdown-arrow"></i></span>
                 <div class="dropdown-menu">
                     <a href="client.html" class="dropdown-item">Client Login</a>
-                    <a href="admin.html" class="dropdown-item">Pilot Login</a>
+                    <a href="admin.html" class="dropdown-item">Login</a>
                 </div>
             </div>
         </div>
         <div class="navbar-right-desktop">
             <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-moon" id="desktop-theme-icon"></i></button>
-            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
-            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Pilot Login</a>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-language"></i></button>
+            <a href="login.html" class="login-btn"><i class="fas fa-drone"></i> Login</a>
             <a href="join.html" class="login-btn">Register</a>
         </div>
         <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
@@ -646,7 +646,7 @@
 <!-- Mobile Menu -->
 <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-header">
-        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-plane"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">Light Blue Horizon</span></div></a>
+        <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-satellite"></i></div><div><div class="logo-text">Aero<span>Drone</span></div><span class="logo-tagline">Light Blue Horizon</span></div></a>
         <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
     </div>
     <div class="mobile-menu-items">
@@ -657,11 +657,11 @@
         <a href="pricing.html" class="mobile-menu-item"><i class="fas fa-tag"></i> Pricing</a>
         <a href="gallery.html" class="mobile-menu-item"><i class="fas fa-images"></i> Gallery</a>
         <a href="contact.html" class="mobile-menu-item"><i class="fas fa-envelope"></i> Contact</a>
-        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')"><span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i></button><div id="dashboard-mobile" class="mobile-dropdown-content"><a href="client.html">Client Login</a><a href="admin.html">Pilot Login</a></div></div>
+        <div class="mobile-dropdown"><button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('dashboard-mobile')"><span><i class="fas fa-chart-pie"></i> Pilot Portal</span> <i class="fas fa-chevron-down"></i></button><div id="dashboard-mobile" class="mobile-dropdown-content"><a href="client.html">Client Login</a><a href="admin.html">Login</a></div></div>
         <div class="mobile-separator"></div>
         <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
         <button class="mobile-action-item" onclick="window.location.href='join.html'"><i class="fas fa-user-plus"></i> Register</button>
-        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-language"></i> RTL</button>
         <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-moon"></i> Theme</button>
     </div>
 </div>
@@ -774,54 +774,87 @@
 </section>
 
 <!-- PRICING TIERS SECTION -->
-<section class="pricing-section">
-    <div class="container">
-        <div class="section-header">
-            <h2>Service Packages</h2>
-            <p>Flexible pricing for every project size</p>
+<section class="pricing-section" style="padding:4rem 1rem;">
+    <div class="container" style="max-width:1200px; margin:0 auto;">
+        
+        <div class="section-header" style="text-align:center; margin-bottom:3rem;">
+            <h2 style="font-size:2.5rem; margin-bottom:0.5rem;">Service Packages</h2>
+            <p style="color:#666;">Flexible pricing for every project size</p>
         </div>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-icon"><i class="fas fa-chart-line"></i></div>
+
+        <div class="pricing-grid" style="
+            display:grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap:2rem;
+        ">
+
+            <!-- CARD -->
+            <div class="pricing-card" style="padding:2rem; border-radius:12px; background:#fff; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.08);">
+                <div class="pricing-icon" style="font-size:2rem; margin-bottom:1rem;"><i class="fas fa-chart-line"></i></div>
                 <h3>Basic</h3>
-                <div class="price">$299<span>/project</span></div>
-                <ul class="pricing-features">
+                <div class="price" style="font-size:2rem; margin:1rem 0;">$299<span style="font-size:14px;">/project</span></div>
+                <ul class="pricing-features" style="list-style:none; padding:0; margin:1.5rem 0; text-align:left;">
                     <li><i class="fas fa-check"></i> 2-Hour Flight Time</li>
                     <li><i class="fas fa-check"></i> 4K Video & Photos</li>
                     <li><i class="fas fa-check"></i> Basic Editing</li>
                     <li><i class="fas fa-check"></i> 3-Day Delivery</li>
                 </ul>
-                <button class="pricing-btn">Get Started</button>
+                <button class="pricing-btn" style="padding:10px 20px; border:none; background:#000; color:#fff; border-radius:6px;">Get Started</button>
             </div>
-            <div class="pricing-card popular">
-                <div class="popular-badge">Most Popular</div>
-                <div class="pricing-icon"><i class="fas fa-rocket"></i></div>
+
+            <!-- CARD -->
+            <div class="pricing-card popular" style="padding:2rem; border-radius:12px; background:#fff; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.12); position:relative;">
+                <div class="popular-badge" style="position:absolute; top:-10px; right:10px; background:#000; color:#fff; padding:5px 10px; font-size:12px; border-radius:6px;">Most Popular</div>
+                <div class="pricing-icon" style="font-size:2rem; margin-bottom:1rem;"><i class="fas fa-rocket"></i></div>
                 <h3>Professional</h3>
-                <div class="price">$699<span>/project</span></div>
-                <ul class="pricing-features">
+                <div class="price" style="font-size:2rem; margin:1rem 0;">$699<span style="font-size:14px;">/project</span></div>
+                <ul class="pricing-features" style="list-style:none; padding:0; margin:1.5rem 0; text-align:left;">
                     <li><i class="fas fa-check"></i> Full-Day Coverage</li>
                     <li><i class="fas fa-check"></i> 8K/4K HDR + Thermal</li>
                     <li><i class="fas fa-check"></i> Advanced Editing</li>
                     <li><i class="fas fa-check"></i> 24-Hour Priority Delivery</li>
                     <li><i class="fas fa-check"></i> FAA Certified Pilot</li>
                 </ul>
-                <button class="pricing-btn">Get Started</button>
+                <button class="pricing-btn" style="padding:10px 20px; border:none; background:#000; color:#fff; border-radius:6px;">Get Started</button>
             </div>
-            <div class="pricing-card">
-                <div class="pricing-icon"><i class="fas fa-chart-line"></i></div>
+
+            <!-- CARD -->
+            <div class="pricing-card" style="padding:2rem; border-radius:12px; background:#fff; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.08);">
+                <div class="pricing-icon" style="font-size:2rem; margin-bottom:1rem;"><i class="fas fa-chart-line"></i></div>
                 <h3>Enterprise</h3>
-                <div class="price">Custom<span>/project</span></div>
-                <ul class="pricing-features">
+                <div class="price" style="font-size:2rem; margin:1rem 0;">Custom<span style="font-size:14px;">/project</span></div>
+                <ul class="pricing-features" style="list-style:none; padding:0; margin:1.5rem 0; text-align:left;">
                     <li><i class="fas fa-check"></i> Unlimited Flight Time</li>
                     <li><i class="fas fa-check"></i> LiDAR + Multispectral</li>
-                    
                     <li><i class="fas fa-check"></i> Dedicated Project Manager</li>
                     <li><i class="fas fa-check"></i> Same-Day Delivery</li>
                 </ul>
-                <button class="pricing-btn">Contact Us</button>
+                <button class="pricing-btn" style="padding:10px 20px; border:none; background:#000; color:#fff; border-radius:6px;">Contact Us</button>
             </div>
+
         </div>
     </div>
+
+    <!-- ✅ RESPONSIVE FIX -->
+    <style>
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .pricing-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </section>
 
 <!-- INDUSTRY APPLICATIONS SECTION -->
@@ -863,7 +896,7 @@
             <!-- Left column with exact same logo + tagline -->
             <div class="footer-logo-block">
                 <a href="index.html" class="logo">
-                    <div class="logo-icon"><i class="fas fa-plane"></i></div>
+                    <div class="logo-icon"><i class="fas fa-satellite"></i></div>
                     <div>
                         <div class="logo-text">Aero<span>Drone</span></div>
                         <span class="logo-tagline">Light Blue Horizon</span>
